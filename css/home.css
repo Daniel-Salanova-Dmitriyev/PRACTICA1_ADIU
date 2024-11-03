@@ -1,0 +1,46 @@
+*{
+    padding:0;
+    margin: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+    list-style: none;
+}
+
+:root{
+    --bg-color: #222327;
+    --text-color: #fff;
+    --text-color-secondary : #222327;
+    --main-color: #29fd53;
+}
+
+.navigationBar{
+    background: var(--bg-color);
+    top: 0;
+    right: 0;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: transparent;
+    padding: 28px 12%;
+    transition: all .50s ease;
+}
+
+.logo{
+    display: flex;
+    align-items: center;
+}
+
+.logo i {
+    color: var(--main-color);
+    font-size: 56px;
+    margin-right: 3px;
+    text-decoration: none;
+    list-style: none;
+}
+
+.logo span{
+    color: var(--text-color-secondary);
+    font-size: 1.1rem;
+    font-weight: 600;
+}
