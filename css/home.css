@@ -10,8 +10,18 @@
     --bg-color: #222327;
     --text-color: #fff;
     --text-color-secondary : #222327;
-    --main-color: #29fd53;
+    --main-color: #29e1da;
 }
+
+
+header{
+    position: fixed;
+    width: 100%;
+    top:0;
+    right: 0;
+    z-index: 1000;
+}
+
 
 .navigationBar{
     background: var(--bg-color);
@@ -21,9 +31,19 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background: transparent;
     padding: 28px 12%;
     transition: all .50s ease;
+}
+
+.navigationBar *{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.navigationBar a {
+    text-decoration: none;
+    list-style: none;
 }
 
 .logo{
@@ -40,7 +60,126 @@
 }
 
 .logo span{
-    color: var(--text-color-secondary);
+    color: var(--text-color);
     font-size: 1.1rem;
     font-weight: 600;
 }
+
+.itemsBar{
+    display: flex;
+    margin-bottom: 0;
+}
+
+.itemsBar a {
+    color: var(--text-color);
+    font-size: 1.1rem;
+    font-weight: 500;
+    padding: 5px 0;
+    margin: 0px 30px;
+    transition: all .50s ease;
+}
+
+.itemsBar a:hover{
+    color: var(--main-color);
+}
+
+.itemsBar a:active{
+    color: var(--main-color);
+}
+
+.logins{
+    display: flex;
+    align-items: center;
+}
+
+.logins a{
+    margin-right: 25px;
+    margin-left: 10px;
+    color: var(--text-color);
+    font-size: 1.1rem;
+    font-weight: 500;
+    transition: all 0.50s ease
+}
+
+#menu-icon{
+    color: var(--text-color);
+    font-size: 35px;
+    cursor: pointer;
+    z-index: 10001;
+    display: none;
+}
+
+.user {
+    display: flex;
+    align-items: center;
+}
+
+.user i {
+    color: var(--main-color);
+    font-size: 28px;
+    margin-right: 7px;
+}
+
+.logins a:hover{
+    color: var(--main-color);
+}
+
+.logins a:active{
+    color: var(--main-color);
+}
+
+@media(max-width: 1280px){
+    .navigationBar{
+        padding: 14px 2%;
+        transition: -2s;
+    }
+
+    .itemsBar a{
+        padding: 5px 0;
+        margin: 0 20px;
+    }
+}
+
+
+@media(max-width: 1090px){
+    #menu-icon{
+        display: block;
+    }
+
+    .itemsBar{
+        position: absolute;
+        top: 100%;
+        right: -100%;
+        width: 270px;
+        height: 29vh;
+        background-color: var(--main-color);
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-start;
+        border-radius: 10px;
+        transition: all .50s ease;
+    }
+
+    .itemsBar a{
+        display: block;
+        margin: 12px 0;
+        padding: 0px 25px;
+        transition: all .50s ease;
+    }
+
+    .itemsBar a:hover{
+        color: var(--text-color);
+        transform: translateY(5px);
+    }
+
+    .itemsBar a.active{
+        color: var(--text-color)
+    }
+
+    .itemsBar.open{
+        right: 2%;
+    }
+
+}
+

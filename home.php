@@ -48,97 +48,28 @@
     <header>
 
         <div class="navigationBar">
-            <a href="#" class="logo"><i class="ri-home-heart-fill"></i><span>Logo</span></a>
+            <a href="#" class="logo"><i class="ri-store-3-fill"></i><span>Estimazon</span></a>
             <ul class="itemsBar">
                 <li><a href="./home.php" class="active">Home</a></li>
                 <li><a href="./graficas.html">Estadísticas</a></li>
                 <li><a href="https://www.uib.cat/">Universidad</a></li>
             </ul>
-            <div class="main">
-                <a href="./login.php" class="user"><i class="ri-user-line"></i>Iniciar Sesión</a>
-                <a href="./register.php">Registrarse</a>
-                <div class="bx bx-menu" id="menu-icon">
+            <div class="logins">
+                <?php
+                    if (isset($_COOKIE["usuario"])) {
+                        echo '<a href="#" class="user"><i class="ri-user-line"></i>'. $_COOKIE["usuario"] .'</a>';
+                        echo '<a href="./account/closeAccount.php">Cerrar Sesión</a>';
+                    }else{
+                        echo '<a href="./login.php" class="user"><i class="ri-user-line"></i>Iniciar Sesión</a>';
+                        echo '<a href="./register.php">Registrarse</a>';
+                    }
+                ?>
 
-                </div>
+                <div class="bx bx-menu" id="menu-icon"></div>
             </div>
         </div>
         
 
-        <!-- Barra de Navegación -->
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-            <a class="navbar-brand" href="./home.php">Estimazon</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCart" aria-controls="navbarCart" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCart" aria-controls="navbarCart" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ml-auto">
-                    <-- Carrito -->
-                    <?php
-                    if (isset($_COOKIE["carrito"])) {
-                        $conexion = mysqli_connect("localhost", "root", "") or die("Error conecting to database server!");
-                        $bd = mysqli_select_db($conexion, "bd2oracle") or die("Error selecting database!"); //Elegimos conexión y tabla a la que conectarnos
-                        
-                        echo ' <li class="nav-item dropdown">';
-                        echo '<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Carrito</a>';
-                        echo '<div class="dropdown-menu" aria-labelledby="navbarDropdown">';
-                        echo ' <ul class="list-group">';
-                        $array = json_decode($_COOKIE["carrito"]);
-                        $cantidad = json_decode($_COOKIE["cantidadCarrito"]);
-                        $precioTotal = 0;
-                        for ($i = 0; $i < count($array); $i++) {
-                            $instruccion = "SELECT pro_nombre, pro_precio, pro_descuento, pro_oferta FROM producto WHERE pro_id = " . $array[$i];
-                            $res = mysqli_query($conexion, $instruccion);
-                            $fila = mysqli_fetch_assoc($res);
-                            
-                            $precio = 0;
-                            if($fila["pro_oferta"]){
-                                $precio =  ($fila["pro_precio"] - $fila["pro_precio"]*$fila["pro_descuento"]*0.01);
-                            }else{
-                                $precio = $fila["pro_precio"];
-                            }
-                            $precioTotal += ($precio * $cantidad[$i]);
-                            echo '<li class="list-group-item">' . $fila["pro_nombre"] . '<p>Cantidad: ' . $cantidad[$i] . '</p>' .'<p> Precio: '. $precio . '</p>' . '<form action="./cart/deleteItemCart.php" class="mt-2">' . '<input hidden id="deleteItemCart" name="deleteItemCart" value="' . $i . '" />' . '<button class="btn btn-danger" type="submit">Eliminar</button>' .'</form>' . '</li>';
-    
-                        }
-                        echo '</ul>';
-                        echo '<div class="dropdown-divider"></div>';
-                        echo '<p class="ml-3"> Precio total: ' . $precioTotal . '</p>';
-                        echo '<a class="dropdown-item btn btn-primary" href="./checkout.php">Comprar</a>';
-                        echo '</div>';
-                        echo '</li>';
-                    }
-
-                    ?>
-                    
-
-
-                    <?php
-                    if (isset($_COOKIE["usuario"])) {
-                        echo '<li class="nav-item">';
-                        echo '<a class="nav-link">Logeado con ' . $_COOKIE["usuario"] . "</a>";
-                        echo '</li>';
-                        echo '<li class="nav_item">';
-                        echo '<a class="nav-link" href="./account/closeAccount.php">Cerrar Sesión</a>';
-                        echo '</li>';
-                    } else {
-                        echo '<li class="nav_item">';
-                        echo '<a class="nav-link" href="./login.php">Inicio de Sesión</a>';
-                        echo '</li>';
-                        echo '<li class="nav_item">';
-                        echo '<a class="nav-link" href="./register.php">Registrarse</a>';
-                        echo '</li>';
-                    }
-                    ?>
-                </ul>
-            </div>
-        </nav> 
     </header>
 
 
@@ -259,6 +190,7 @@
         </div>
     </footer>
     <!-- Enlace a los scripts de Bootstrap (jQuery y Popper.js son necesarios) -->
+     <script src="./js/home.js"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js" integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous"></script>
