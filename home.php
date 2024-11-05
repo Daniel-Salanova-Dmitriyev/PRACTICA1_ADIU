@@ -14,7 +14,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.5.0/remixicon.css" integrity="sha512-6p+GTq7fjTHD/sdFPWHaFoALKeWOU9f9MPBoPnvJEWBkGS4PKVVbCpMps6IXnTiXghFbxlgDE8QRHc3MU91lJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/boxicons/2.1.0/css/boxicons.min.css" integrity="sha512-pVCM5+SN2+qwj36KonHToF2p1oIvoU3bsqxphdOIWMYmgr4ZqD3t5DjKvvetKhXGc/ZG5REYTT6ltKfExEei/Q==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="./css/home.css">
+    <link rel="stylesheet" href="css/home.css">
 
     <style>
         html,
@@ -55,20 +55,73 @@
                 <li><a href="https://www.uib.cat/">Universidad</a></li>
             </ul>
             <div class="logins">
+
+
+                <a href="#" id="cart-icon"><i class="ri-shopping-cart-line"></i></a>
+
+                <div class="itemsCart container h-auto w-50">
+                    <table class="table row">
+                        <thead>
+                            <tr class="">
+                                
+                                <th scope="col">Producto</th>
+                                <th scope="col">Cantidad</th>
+                                <th scope="col">Precio</th>
+                                <th scope="col">Eliminar?</th>
+                            </tr>
+                        </thead>
+                        <tbody class="row flex-direction">
+                            <tr> 
+                                <td class="pb-4 pt-4">Secadora</td>
+                                <th scope="row" class="pb-4 pt-4">23</th>
+                                <td class="pb-4 pt-4">450</td>
+                                <td class="pb-3 pt-3"><button type="button" class="btn btn-outline-danger">Eliminar</button></td>
+                            </tr>
+                            <tr> 
+                                <td class="pb-4 pt-4">Secadora</td>
+                                <th scope="row" class="pb-4 pt-4">4</th>
+                                <td class="pb-4 pt-4">450</td>
+                                <td class="pb-3 pt-3"><button type="button" class="btn btn-outline-danger">Eliminar</button></td>
+                            </tr>
+                            <tr> 
+                                <td class="pb-4 pt-4">Secadora</td>
+                                <th scope="row" class="pb-4 pt-4">3</th>
+                                <td class="pb-4 pt-4">450</td>
+                                <td class="pb-3 pt-3"><button type="button" class="btn btn-outline-danger">Eliminar</button></td>
+                            </tr>
+                            <tr> 
+                                <td class="pb-4 pt-4">Secadora</td>
+                                <th scope="row" class="pb-4 pt-4">2</th>
+                                <td class="pb-4 pt-4">450</td>
+                                <td class="pb-3 pt-3"><button type="button" class="btn btn-outline-danger">Eliminar</button></td>
+                            </tr>
+                            <tr> 
+                                <td class="pb-4 pt-4">Secadora</td>
+                                <th scope="row" class="pb-4 pt-4">1</th>
+                                <td class="pb-4 pt-4">450</td>
+                                <td class="pb-3 pt-3"><button type="button" class="btn btn-outline-danger">Eliminar</button></td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+
+
+                </div>
+
                 <?php
-                    if (isset($_COOKIE["usuario"])) {
-                        echo '<a href="#" class="user"><i class="ri-user-line"></i>'. $_COOKIE["usuario"] .'</a>';
-                        echo '<a href="./account/closeAccount.php">Cerrar Sesión</a>';
-                    }else{
-                        echo '<a href="./login.php" class="user"><i class="ri-user-line"></i>Iniciar Sesión</a>';
-                        echo '<a href="./register.php">Registrarse</a>';
-                    }
+                if (isset($_COOKIE["usuario"])) {
+                    echo '<a href="#" class="user"><i class="ri-user-line"></i>' . $_COOKIE["usuario"] . '</a>';
+                    echo '<a href="./account/closeAccount.php">Cerrar Sesión</a>';
+                } else {
+                    echo '<a href="./login.php" class="user"><i class="ri-user-line"></i>Iniciar Sesión</a>';
+                    echo '<a href="./register.php">Registrarse</a>';
+                }
                 ?>
 
                 <div class="bx bx-menu" id="menu-icon"></div>
             </div>
         </div>
-        
+
 
     </header>
 
@@ -96,7 +149,7 @@
 
 
 
-  
+
         <div class="container mt-4">
             <div class="row">
                 <div class="col-md-3">
@@ -141,13 +194,13 @@
                         while ($fila = mysqli_fetch_assoc($res)) {
                             echo '<div class="col-md-4 mb-4">';
                             echo '<div class="card h-100 mb-4">';
-                            echo '<img src="./img/'. $fila["pro_imagen"] . '" class="card-img-top h-50" alt="Producto 1">';
+                            echo '<img src="./img/' . $fila["pro_imagen"] . '" class="card-img-top h-50" alt="Producto 1">';
                             echo '<div class="card-body">';
                             echo '<h5 class="card-title">' . '<a  href="./details.php?producto=' . $fila["pro_id"] . '">' . $fila["pro_nombre"] . '</a>' . "</h5>";
                             echo '<p class="card-text">' . $fila["pro_descripcion"] . '</p>';
-                            if($fila["pro_oferta"]){
-                                echo '<p class="card-text"><strong>Oferta!:</strong><del>' .  $fila["pro_precio"]. '</del> '. ($fila["pro_precio"] - $fila["pro_precio"]*$fila["pro_descuento"]*0.01) . "$</div>";
-                            }else{
+                            if ($fila["pro_oferta"]) {
+                                echo '<p class="card-text"><strong>Oferta!:</strong><del>' .  $fila["pro_precio"] . '</del> ' . ($fila["pro_precio"] - $fila["pro_precio"] * $fila["pro_descuento"] * 0.01) . "$</div>";
+                            } else {
                                 echo '<p class="card-text"><strong>Precio:</strong>' . $fila["pro_precio"] . "$</div>";
                             }
                             if (isset($_COOKIE["usuario"])) {
@@ -186,14 +239,15 @@
     </main>
     <footer class="footer py-3 bg-dark text-white mt-5">
         <div class="container text-center">
-            <p>&copy; 2023 Estimazon</p>
+            <p>&copy; 2024 Estimazon</p>
         </div>
     </footer>
+
     <!-- Enlace a los scripts de Bootstrap (jQuery y Popper.js son necesarios) -->
-     <script src="./js/home.js"></script>
+    <script src="./js/home.js"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js" integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js" integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous"></script>
 </body>
 
 </html>
