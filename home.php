@@ -85,29 +85,46 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <th scope="row">Secadora</th>
-                        <td>4</td>
-                        <td>5$</td>
-                        <td><button type="button" class="btn btn-outline-danger">Eliminar</button></td>
-                    </tr>
-                    <tr>
-                        <th scope="row">Libro</th>
-                        <td>2</td>
-                        <td>20$</td>
-                        <td><button type="button" class="btn btn-outline-danger">Eliminar</button></td>
-                    </tr>
-                    <tr>
-                        <th scope="row">Fruta</th>
-                        <td>25</td>
-                        <td>2$</td>
-                        <td><button type="button" class="btn btn-outline-danger">Eliminar</button></td>
-                    </tr>
-                    <tr>
-                        <th scope="row">Total: </ths>
-                        <td colspan="2">250$</td>
-                        <td><button type="button" class="btn btn-outline-success">Pagar</button></t>
-                    </tr>
+                    <?php
+                        if (isset($_COOKIE["carrito"])) {
+                            $conexion = mysqli_connect("localhost", "root", "") or die("Error conecting to database server!");
+                            $bd = mysqli_select_db($conexion, "bd2oracle") or die("Error selecting database!"); //Elegimos conexión y tabla a la que conectarnos
+                            
+                            $array = json_decode($_COOKIE["carrito"]);
+                            $cantidad = json_decode($_COOKIE["cantidadCarrito"]);
+                            $precioTotal = 0;
+                            for ($i = 0; $i < count($array); $i++) {
+                                $instruccion = "SELECT pro_nombre, pro_precio, pro_descuento, pro_oferta FROM producto WHERE pro_id = " . $array[$i];
+                                $res = mysqli_query($conexion, $instruccion);
+                                $fila = mysqli_fetch_assoc($res);
+                                
+                                $precio = 0;
+                                if($fila["pro_oferta"]){
+                                    $precio =  ($fila["pro_precio"] - $fila["pro_precio"]*$fila["pro_descuento"]*0.01);
+                                }else{
+                                    $precio = $fila["pro_precio"];
+                                }
+                                $precioTotal += ($precio * $cantidad[$i]);
+                                echo '<tr>';
+                                echo '<th scope="row">' . $fila["pro_nombre"]. "</th>"; 
+                                echo '<td>' . $cantidad[$i] . "</td>";
+                                echo '<td>' . $precio . "</td>";
+                                echo '<td>' . '<form action="./cart/deleteItemCart.php">' . '<input hidden id="deleteItemCart" name="deleteItemCart" value="' . $i . '" />' . '<button class="btn btn-outline-danger" type="submit">Eliminar</button>' .'</form>' . "</td>";
+                                echo '</tr>';
+                                
+                            }
+                            echo '<tr>';
+                            echo '<th scope="row">Total: </th>';
+                            echo '<td colspan="2">' . $precioTotal . '</td>';
+                            echo '<td>' . '<form action="./checkout.php">'  . '<button class="btn btn-outline-success" type="submit">Comprar</button>' .'</form>'  . '</td>';
+                            echo '</tr>';
+
+
+                        }
+
+
+                    ?>
+                
                 </tbody>
             </table>
 
