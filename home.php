@@ -59,54 +59,6 @@
 
                 <a href="#" id="cart-icon"><i class="ri-shopping-cart-line"></i></a>
 
-                <div class="itemsCart container h-auto w-50">
-                    <table class="table row">
-                        <thead>
-                            <tr class="">
-                                
-                                <th scope="col">Producto</th>
-                                <th scope="col">Cantidad</th>
-                                <th scope="col">Precio</th>
-                                <th scope="col">Eliminar?</th>
-                            </tr>
-                        </thead>
-                        <tbody class="row flex-direction">
-                            <tr> 
-                                <td class="pb-4 pt-4">Secadora</td>
-                                <th scope="row" class="pb-4 pt-4">23</th>
-                                <td class="pb-4 pt-4">450</td>
-                                <td class="pb-3 pt-3"><button type="button" class="btn btn-outline-danger">Eliminar</button></td>
-                            </tr>
-                            <tr> 
-                                <td class="pb-4 pt-4">Secadora</td>
-                                <th scope="row" class="pb-4 pt-4">4</th>
-                                <td class="pb-4 pt-4">450</td>
-                                <td class="pb-3 pt-3"><button type="button" class="btn btn-outline-danger">Eliminar</button></td>
-                            </tr>
-                            <tr> 
-                                <td class="pb-4 pt-4">Secadora</td>
-                                <th scope="row" class="pb-4 pt-4">3</th>
-                                <td class="pb-4 pt-4">450</td>
-                                <td class="pb-3 pt-3"><button type="button" class="btn btn-outline-danger">Eliminar</button></td>
-                            </tr>
-                            <tr> 
-                                <td class="pb-4 pt-4">Secadora</td>
-                                <th scope="row" class="pb-4 pt-4">2</th>
-                                <td class="pb-4 pt-4">450</td>
-                                <td class="pb-3 pt-3"><button type="button" class="btn btn-outline-danger">Eliminar</button></td>
-                            </tr>
-                            <tr> 
-                                <td class="pb-4 pt-4">Secadora</td>
-                                <th scope="row" class="pb-4 pt-4">1</th>
-                                <td class="pb-4 pt-4">450</td>
-                                <td class="pb-3 pt-3"><button type="button" class="btn btn-outline-danger">Eliminar</button></td>
-                            </tr>
-
-                        </tbody>
-                    </table>
-
-
-                </div>
 
                 <?php
                 if (isset($_COOKIE["usuario"])) {
@@ -122,6 +74,45 @@
             </div>
         </div>
 
+        <div class="itemsCart h-auto w-50">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Producto</th>
+                        <th scope="col">Cantidad</th>
+                        <th scope="col">Precio</th>
+                        <th scope="col">Eliminar</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th scope="row">Secadora</th>
+                        <td>4</td>
+                        <td>5$</td>
+                        <td><button type="button" class="btn btn-outline-danger">Eliminar</button></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Libro</th>
+                        <td>2</td>
+                        <td>20$</td>
+                        <td><button type="button" class="btn btn-outline-danger">Eliminar</button></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Fruta</th>
+                        <td>25</td>
+                        <td>2$</td>
+                        <td><button type="button" class="btn btn-outline-danger">Eliminar</button></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Total: </ths>
+                        <td colspan="2">250$</td>
+                        <td><button type="button" class="btn btn-outline-success">Pagar</button></t>
+                    </tr>
+                </tbody>
+            </table>
+
+
+        </div>
 
     </header>
 

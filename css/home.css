@@ -186,10 +186,14 @@ header{
 }
 
 .itemsCart{
+    display: flex;
+    align-items: stretch;
+    min-height: 100%;
     position: absolute;
     top: 100%;
     right: -100%;
-    width: 570px;
+    width: 370px;
+    height: fit-content;
     background-color: var(--main-color);
     color: var(--text-color);
     /*display: flex;
@@ -203,6 +207,5 @@ header{
 
 .itemsCart.open{
     right: 2%;
-    width: 570px;
 }
 
