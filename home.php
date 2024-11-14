@@ -89,7 +89,7 @@
             <a href="#" class="logo"><i class="ri-store-3-fill"></i><span>Estimazon</span></a>
             <ul class="itemsBar">
                 <li><a href="./home.php" class="active">Home</a></li>
-                <li><a href="./graficas.html">Estadísticas</a></li>
+                <li><a href="./graficas.php">Estadísticas</a></li>
                 <li><a href="https://www.uib.cat/">Universidad</a></li>
             </ul>
             <div class="logins">
