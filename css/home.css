@@ -131,6 +131,15 @@ header{
     color: var(--main-color);
 }
 
+.content-page{
+    position: absolute;
+    top: 150px;
+    left: 80px;
+    height: 100%;
+    transition: all .50s ease;
+}
+
+
 @media(max-width: 1280px){
     .navigationBar{
         padding: 14px 2%;
@@ -140,6 +149,13 @@ header{
     .itemsBar a{
         padding: 5px 0;
         margin: 0 20px;
+    }
+
+    .content-page{
+        position: absolute;
+        top: 150px;
+        left: 80px;
+        transition: all .50s ease;
     }
 }
 
@@ -182,6 +198,13 @@ header{
 
     .itemsBar.open{
         right: 2%;
+    }
+
+    .content-page{
+        position: absolute;
+        top: 150px;
+        left: 50px;
+        transition: all .50s ease;
     }
 }
 
