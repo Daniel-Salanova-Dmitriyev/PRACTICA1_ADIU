@@ -8,7 +8,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Tu Tienda </title>
+    <title>Estimazon</title>
     <!-- Enlace a los estilos de Bootstrap -->
 
     <link rel="stylesheet" href="css/home.css">
@@ -68,7 +68,6 @@
         .content {
             flex: 1;
         }
-
 
         .card:hover {
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -181,12 +180,15 @@
 
         <!-- Buscador -->
         <div class="container mt-4">
+            <div class="row">
+                
             <form class="input-group" action="./home.php">
-                <input type="text" class="form-control" name="buscar" id="buscar" placeholder="Buscar productos...">
+                <input type="text" class="form-control form-control-lg" name="buscar" id="buscar" placeholder="Buscar productos...">
                 <div class="input-group-append">
-                    <button class="btn btn-outline-secondary" type="submit">Buscar</button>
+                    <button class="btn btn-outline-secondary ms-3" type="submit">Buscar</button>
                 </div>
             </form>
+            </div>
         </div>
 
 
@@ -216,7 +218,7 @@
 
                 <!-- Listado de Productos -->
                 <div class="col-md-9">
-                    <div class="row row-cols-1 row-cols-md-2 g-4">
+                    <div class="row row-cols-1 row-cols-md-3 g-4" style="margin-bottom:200px">
                         <?php
                             $conexion = mysqli_connect("localhost", "root", "") or die("Error conecting to database server!");
                             $bd = mysqli_select_db($conexion, "bd2oracle") or die("Error selecting database!"); //Elegimos conexión y tabla a la que conectarnos
