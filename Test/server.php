@@ -10,12 +10,13 @@ if ($conn->connect_error) {
 header('Content-Type: application/json');
 
 // Consulta para obtener pedidos por nacionalidad
-$consultaNacionalidad = "SELECT pais.pai_nombre AS Nacionalidad, COUNT(pedido.ped_id) AS TotalPedidos
+$consultaNacionalidad = "SELECT zonageografica.zog_nombre AS Continente, pais.pai_nombre AS Nacionalidad, COUNT(pedido.ped_id) AS TotalPedidos
 FROM pedido
 JOIN domicilio ON pedido.ped_dom_id = domicilio.dom_id
 JOIN calle ON domicilio.dom_cal_id = calle.cal_id
 JOIN ciudad ON calle.cal_ciu_id = ciudad.ciu_id
-JOIN pais ON ciudad.ciu_pai_id = pais.pai_id
+JOIN pais ON ciudad.ciu_pai_id = pais.pai_id    
+JOIN zonageografica ON pais.pai_zog_id = zonageografica.zog_id
 GROUP BY pais.pai_nombre;";
 
 $pedidosNacionalidad = mysqli_query($conn, $consultaNacionalidad);

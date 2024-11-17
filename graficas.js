@@ -69,27 +69,89 @@ fetch('https://fakestoreapi.com/carts')
 $(document).ready(function () {
     $.get("Test/server.php", function (data) {
         console.log("Datos recibidos:", data);
-  
+        let mapa = [];
+
         const nacionalidadData = data.nacionalidad.map(item => ({
+          continente: item.Continente,
           name: item.Nacionalidad,
           y: parseInt(item.TotalPedidos)
         }));
+
+        console.log(nacionalidadData);
   
         const ciudadData = data.ciudad.map(item => ({
           name: item.Ciudad,
           y: parseInt(item.TotalPedidos)
         }));
   
+        // {name: CONTINENTE, data: {{name: PAIS, value: VALOR}}}
+        const continentMap = new Map();
+
+        // Agrupamos los datos por continente usando un Map
+        nacionalidadData.forEach(item => {
+          console.log(item);
+          if (!continentMap.has(item.continente)) {
+            // Si el continente no existe en el mapa, lo añadimos con un array vacío
+            continentMap.set(item.continente, []);
+          }
+          
+          // Agregamos el país al continente correspondiente
+          continentMap.get(item.continente).push({
+            name: item.name,
+            value: parseInt(item.y, 10) // Convertimos TotalPedidos a número
+          });
+        });
+        
+        // Convertimos el Map al formato requerido
+        const mapaContinentesPedidos = Array.from(continentMap, ([continent, countries]) => ({
+          name: continent,
+          data: countries
+        }));
+        
         // Generar gráfico para nacionalidad
         Highcharts.chart('grafico1', {
-          chart: { type: 'pie' },
-          title: { text: 'Pedidos por nacionalidad' },
-          series: [{
-            name: 'Naciones',
-            colorByPoint: true,
-            data: nacionalidadData
-          }]
-        });
+          chart: {
+              type: 'packedbubble',
+              height: '100%'
+          },
+          title: {
+              text: 'Pedidos por continente',
+              align: 'left'
+          },
+          tooltip: {
+              useHTML: true,
+              pointFormat: '<b>{point.name}:</b> {point.value} pedidos'
+          },
+          plotOptions: {
+              packedbubble: {
+                  minSize: '30%',
+                  maxSize: '120%',
+                  zMin: 0,
+                  zMax: 1000,
+                  layoutAlgorithm: {
+                      splitSeries: false,
+                      gravitationalConstant: 0.02
+                  },
+                  dataLabels: {
+                      enabled: true,
+                      format: '{point.name}',
+                      filter: {
+                          property: 'y',
+                          operator: '>',
+                          value: 250
+                      },
+                      style: {
+                          color: 'black',
+                          textOutline: 'none',
+                          fontWeight: 'normal'
+                      }
+                  }
+              }
+          },
+          series: mapaContinentesPedidos
+      });
+
+        
   
         // Generar gráfico para ciudad
         Highcharts.chart('grafico2', {
