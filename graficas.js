@@ -1,66 +1,70 @@
-// Inicializamos el mapa de productos
+//Creamos un mapa de productos, donde clave es el nombre y valor es la cantidad
 let productos = new Map();
 
 fetch('https://fakestoreapi.com/carts')
-    .then(res => res.json())
-    .then(json => {
+    .then(res=>res.json())
+    .then(json=> {
         json.forEach(carrito => {
             let arrayProductos = carrito.products;
             arrayProductos.forEach(element => {
-                if (!productos.get(element.productId)) { // No existe el elemento en el mapa
+                if(!productos.get(element.productId)){ //No existe el elemento en el mapa
                     productos.set(element.productId, element.quantity);
-                } else {
+                }else{
                     let cantidad = productos.get(element.productId);
-                    productos.set(element.productId, cantidad + element.quantity);
+                    productos.set(element.productId, cantidad+element.quantity);
                 }
             });
-        });
-
-        // Obtenemos las claves y valores del mapa de productos
+        });   
+        //Obtenemos 2 mapIterators de claves y valores
         let nombresProductos = productos.keys();
         let valoresProductos = productos.values();
+        //Obtenemos la longitud del mapa
         const length = Array.from(nombresProductos).length;
-        nombresProductos = productos.keys(); // Actualizamos las claves
-
-        let total = 0;
-        for (const e of valoresProductos) {
-            total += e;
-        }
-
-        valoresProductos = productos.values(); // Reiniciamos para otra iteración
-        let valoresSeries = [];
+        nombresProductos = productos.keys(); //Actualizamos las claves, ya que con el anterior nos cambia la variable
+        //Colocamos los valores
+        let valoresSeries = []; //Será un array con objetos {nombre, densidad}
         let i = 0;
-        for (const e of valoresProductos) {
-            let serie = { name: "", y: 0 };
-            for (let j = 0; j < length; j++) {
-                if (i === j) {
-                    serie.y = ((e / total) * 100);
+        for(const e of valoresProductos){
+            let serie = {name:"", data:[].fill(0,0,length)};
+            for(j = 0; j<length; j++){
+                if(i==j){
+                    serie.data.push(e);
+                }else{
+                    serie.data.push(0);
                 }
             }
+            
             i++;
             valoresSeries.push(serie);
         }
-
-        i = 0;
-        for (const v of nombresProductos) {
-            valoresSeries[i++].name = "Producto " + v;
+        //Colocamos los nombres
+        i=0;
+        for(const nombre of nombresProductos){
+            valoresSeries[i++].name = "Producto " + nombre;
         }
-
-        // Generamos la gráfica de productos
-        Highcharts.chart('container', {
-            chart: { type: 'pie' },
-            title: { text: 'Porcentaje de ventas en artículos' },
-            tooltip: { valueSuffix: '%' },
-            subtitle: {
-                text: 'Source: <a href="https://fakestoreapi.com/" target="_default">Fake Store Api</a>'
+        
+        //Una vez que hemos filtrado los datos en un Mapa con las densidades de cada productId
+        const chart = Highcharts.chart('container', {
+            chart: {
+                type: 'bar'
             },
-            series: [{
-                name: 'Percentage',
-                colorByPoint: true,
-                data: valoresSeries
-            }]
+            title: {
+                text: 'Productos comprados'
+            },
+            xAxis: {
+                categories: nombresProductos
+            },
+            yAxis: {
+                title: {
+                    text: 'Compras'
+                }
+            },
+            series: valoresSeries
         });
-    });
+    
+        }
+    
+    )
 
 $(document).ready(function () {
     $.get("Test/server.php", function (data) {

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <title>Gráficas de Ventas</title>
@@ -11,6 +12,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/boxicons/2.1.0/css/boxicons.min.css" integrity="sha512-pVCM5+SN2+qwj36KonHToF2p1oIvoU3bsqxphdOIWMYmgr4ZqD3t5DjKvvetKhXGc/ZG5REYTT6ltKfExEei/Q==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="css/home.css">
 </head>
+
 <body>
     <div class="navigationBar">
         <a href="#" class="logo"><i class="ri-store-3-fill"></i><span>Estimazon</span></a>
@@ -38,10 +40,27 @@
             <div class="bx bx-menu" id="menu-icon"></div>
         </div>
     </div>
-    <h2>Grafica API</h2>
-    <div id="container" style="width: 50%; height: 400px; margin: auto;"></div>
-    <h2>Graficas BD</h2>
-    <div id="grafico1" style="width: 50%; height: 400px; margin: auto;"></div>
-    <div id="grafico2" style="width: 50%; height: 400px; margin: auto;"></div>
+    <main class="container" style="margin-bottom:130px; margin-bottom:80px;">
+            <div class="row">
+                <div class="col-md-4">
+                    <div id="container"></div>
+                </div>
+                
+                <div class="col-md-4">
+                    <div id="grafico1"></div>
+                </div>
+                
+                <div class="col-md-4">
+                    <div id="grafico2"></div>
+                </div>
+            </div>
+    </main>
+    
+    <footer class="footer py-3 bg-dark text-white mt-5 p-3 position-fixed bottom-0 w-100">
+        <div class="text-center">
+            <p>&copy; 2024 Estimazon</p>
+        </div>
+    </footer>
 </body>
+
 </html>
