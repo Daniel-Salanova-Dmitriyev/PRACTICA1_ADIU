@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 17-11-2024 a las 16:12:09
+-- Tiempo de generación: 26-11-2024 a las 19:01:20
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.0.30
 
@@ -165,7 +165,11 @@ INSERT INTO `calle` (`cal_id`, `cal_nombre`, `cal_codigoPostal`, `cal_ciu_id`) V
 (6, 'Calle Madrid', 7012, 2),
 (7, 'Texas Street', 9231, 3),
 (8, 'Dallas Street', 3123, 4),
-(9, 'Paris Carrer', 4321, 5);
+(9, 'Paris Carrer', 4321, 5),
+(10, 'Calle Astana', 4321, 6),
+(11, 'Calle Cairo', 7011, 7),
+(12, 'Calle Lima', 7011, 9),
+(13, 'Calle Mexico', 7011, 8);
 
 -- --------------------------------------------------------
 
@@ -190,7 +194,11 @@ INSERT INTO `ciudad` (`ciu_id`, `ciu_nombre`, `ciu_coordenadas`, `ciu_zonaHorari
 (2, 'Madrid', 'X12-Y23-Z32', 'UTC+0', 3),
 (3, 'Texas', 'X12-Y23-Z32', 'UTC-5', 1),
 (4, 'Dallas', 'X12-Y23-Z32', 'UTC-8', 1),
-(5, 'Paris', 'X12-Y23-Z32', 'UTC+0', 4);
+(5, 'Paris', 'X12-Y23-Z32', 'UTC+0', 4),
+(6, 'Astana', 'X12-Y23-Z32', 'UTC+0', 6),
+(7, 'El Cairo', 'X12-Y23-Z32', 'UTC+0', 5),
+(8, 'Ciudad de Mexico', 'X12-Y23-Z32', 'UTC+0', 8),
+(9, 'Lima', 'X12-Y23-Z32', 'UTC+0', 7);
 
 -- --------------------------------------------------------
 
@@ -304,7 +312,15 @@ CREATE TABLE `domicilio` (
 
 INSERT INTO `domicilio` (`dom_id`, `dom_numero`, `dom_letra`, `dom_bloque`, `dom_cal_id`, `dom_com_id`) VALUES
 (1, 14, 'B', '', 6, 1),
-(2, 14, '', '', 8, 2);
+(2, 14, '', '', 8, 2),
+(3, 14, '', '', 9, 2),
+(4, 14, '', '', 3, 2),
+(5, 14, '', '', 1, 2),
+(6, 14, '', '', 9, 2),
+(7, 14, '', '', 10, 2),
+(8, 14, '', '', 11, 2),
+(9, 14, '', '', 12, 2),
+(10, 14, '', '', 13, 2);
 
 -- --------------------------------------------------------
 
@@ -383,7 +399,8 @@ INSERT INTO `linea` (`lin_id`, `lin_cantidad`, `lin_almacen`, `lin_diaSinLlegar`
 (3, 1, 0, 449, 2, 1),
 (4, 1, 0, 449, 2, 2),
 (5, 10, 0, 194, 3, 3),
-(6, 1, 0, 0, 4, 2);
+(6, 1, 0, 0, 4, 2),
+(7, 1, 0, 0, 5, 1);
 
 -- --------------------------------------------------------
 
@@ -452,7 +469,167 @@ INSERT INTO `pedido` (`ped_id`, `ped_fecha`, `ped_pagado`, `ped_tarjeta`, `ped_e
 (1, '2023-12-11', 1, '31233123', 'Devolucion', 1, 1, 1, 1),
 (2, '2023-12-14', 1, '312312', 'Pagado', 1, 1, NULL, NULL),
 (3, '2023-12-14', 1, '3123213', 'Pagado', 1, 1, NULL, NULL),
-(4, '2024-11-16', 1, '3213123', 'Pagado', 2, 2, NULL, NULL);
+(4, '2024-11-16', 1, '3213123', 'Pagado', 2, 2, NULL, NULL),
+(5, '2024-11-26', 1, '312312', 'Pagado', 2, 3, NULL, NULL),
+(6, '2024-11-16', 1, '3213123', 'Pagado', 2, 6, NULL, NULL),
+(7, '2024-11-16', 1, '3213123', 'Pagado', 2, 6, NULL, NULL),
+(8, '2024-11-16', 1, '3213123', 'Pagado', 2, 6, NULL, NULL),
+(9, '2024-11-16', 1, '3213123', 'Pagado', 2, 6, NULL, NULL),
+(10, '2024-11-16', 1, '3213123', 'Pagado', 2, 6, NULL, NULL),
+(11, '2024-11-16', 1, '3213123', 'Pagado', 2, 6, NULL, NULL),
+(12, '2024-11-16', 1, '3213123', 'Pagado', 2, 7, NULL, NULL),
+(13, '2024-11-16', 1, '3213123', 'Pagado', 2, 7, NULL, NULL),
+(14, '2024-11-16', 1, '3213123', 'Pagado', 2, 9, NULL, NULL),
+(15, '2024-11-16', 1, '3213123', 'Pagado', 2, 9, NULL, NULL),
+(16, '2024-11-16', 1, '3213123', 'Pagado', 2, 9, NULL, NULL),
+(17, '2024-11-16', 1, '3213123', 'Pagado', 2, 9, NULL, NULL),
+(18, '2024-11-16', 1, '3213123', 'Pagado', 2, 10, NULL, NULL),
+(19, '2024-11-16', 1, '3213123', 'Pagado', 2, 10, NULL, NULL),
+(20, '2024-11-16', 1, '3213123', 'Pagado', 2, 10, NULL, NULL),
+(21, '2024-11-16', 1, '3213123', 'Pagado', 2, 10, NULL, NULL),
+(22, '2024-11-16', 1, '3213123', 'Pagado', 2, 10, NULL, NULL),
+(23, '2024-11-16', 1, '3213123', 'Pagado', 2, 10, NULL, NULL),
+(24, '2024-11-16', 1, '3213123', 'Pagado', 2, 10, NULL, NULL),
+(26, '2024-11-16', 1, '3213123', 'Pagado', 2, 6, NULL, NULL),
+(27, '2024-11-16', 1, '3213123', 'Pagado', 2, 7, NULL, NULL),
+(28, '2024-11-16', 1, '3213123', 'Pagado', 2, 7, NULL, NULL),
+(29, '2024-11-16', 1, '3213123', 'Pagado', 2, 9, NULL, NULL),
+(30, '2024-11-16', 1, '3213123', 'Pagado', 2, 9, NULL, NULL),
+(31, '2024-11-16', 1, '3213123', 'Pagado', 2, 9, NULL, NULL),
+(32, '2024-11-16', 1, '3213123', 'Pagado', 2, 9, NULL, NULL),
+(33, '2024-11-16', 1, '3213123', 'Pagado', 2, 10, NULL, NULL),
+(34, '2024-11-16', 1, '3213123', 'Pagado', 2, 10, NULL, NULL),
+(35, '2024-11-16', 1, '3213123', 'Pagado', 2, 10, NULL, NULL),
+(36, '2024-11-16', 1, '3213123', 'Pagado', 2, 10, NULL, NULL),
+(37, '2024-11-16', 1, '3213123', 'Pagado', 2, 10, NULL, NULL),
+(38, '2024-11-16', 1, '3213123', 'Pagado', 2, 10, NULL, NULL),
+(39, '2024-11-16', 1, '3213123', 'Pagado', 2, 10, NULL, NULL),
+(41, '2024-11-16', 1, '3213123', 'Pagado', 2, 6, NULL, NULL),
+(42, '2024-11-16', 1, '3213123', 'Pagado', 2, 7, NULL, NULL),
+(43, '2024-11-16', 1, '3213123', 'Pagado', 2, 7, NULL, NULL),
+(44, '2024-11-16', 1, '3213123', 'Pagado', 2, 9, NULL, NULL),
+(45, '2024-11-16', 1, '3213123', 'Pagado', 2, 9, NULL, NULL),
+(46, '2024-11-16', 1, '3213123', 'Pagado', 2, 9, NULL, NULL),
+(47, '2024-11-16', 1, '3213123', 'Pagado', 2, 9, NULL, NULL),
+(48, '2024-11-16', 1, '3213123', 'Pagado', 2, 10, NULL, NULL),
+(49, '2024-11-16', 1, '3213123', 'Pagado', 2, 10, NULL, NULL),
+(50, '2024-11-16', 1, '3213123', 'Pagado', 2, 10, NULL, NULL),
+(51, '2024-11-16', 1, '3213123', 'Pagado', 2, 10, NULL, NULL),
+(52, '2024-11-16', 1, '3213123', 'Pagado', 2, 10, NULL, NULL),
+(53, '2024-11-16', 1, '3213123', 'Pagado', 2, 10, NULL, NULL),
+(54, '2024-11-16', 1, '3213123', 'Pagado', 2, 10, NULL, NULL),
+(56, '2024-11-16', 1, '3213123', 'Pagado', 2, 6, NULL, NULL),
+(57, '2024-11-16', 1, '3213123', 'Pagado', 2, 7, NULL, NULL),
+(58, '2024-11-16', 1, '3213123', 'Pagado', 2, 7, NULL, NULL),
+(59, '2024-11-16', 1, '3213123', 'Pagado', 2, 9, NULL, NULL),
+(60, '2024-11-16', 1, '3213123', 'Pagado', 2, 9, NULL, NULL),
+(61, '2024-11-16', 1, '3213123', 'Pagado', 2, 9, NULL, NULL),
+(62, '2024-11-16', 1, '3213123', 'Pagado', 2, 9, NULL, NULL),
+(63, '2024-11-16', 1, '3213123', 'Pagado', 2, 10, NULL, NULL),
+(64, '2024-11-16', 1, '3213123', 'Pagado', 2, 10, NULL, NULL),
+(65, '2024-11-16', 1, '3213123', 'Pagado', 2, 10, NULL, NULL),
+(66, '2024-11-16', 1, '3213123', 'Pagado', 2, 10, NULL, NULL),
+(67, '2024-11-16', 1, '3213123', 'Pagado', 2, 10, NULL, NULL),
+(68, '2024-11-16', 1, '3213123', 'Pagado', 2, 10, NULL, NULL),
+(69, '2024-11-16', 1, '3213123', 'Pagado', 2, 10, NULL, NULL),
+(71, '2024-11-16', 1, '3213123', 'Pagado', 2, 6, NULL, NULL),
+(72, '2024-11-16', 1, '3213123', 'Pagado', 2, 7, NULL, NULL),
+(73, '2024-11-16', 1, '3213123', 'Pagado', 2, 7, NULL, NULL),
+(74, '2024-11-16', 1, '3213123', 'Pagado', 2, 9, NULL, NULL),
+(75, '2024-11-16', 1, '3213123', 'Pagado', 2, 9, NULL, NULL),
+(76, '2024-11-16', 1, '3213123', 'Pagado', 2, 9, NULL, NULL),
+(77, '2024-11-16', 1, '3213123', 'Pagado', 2, 9, NULL, NULL),
+(78, '2024-11-16', 1, '3213123', 'Pagado', 2, 10, NULL, NULL),
+(79, '2024-11-16', 1, '3213123', 'Pagado', 2, 10, NULL, NULL),
+(80, '2024-11-16', 1, '3213123', 'Pagado', 2, 10, NULL, NULL),
+(81, '2024-11-16', 1, '3213123', 'Pagado', 2, 10, NULL, NULL),
+(82, '2024-11-16', 1, '3213123', 'Pagado', 2, 10, NULL, NULL),
+(83, '2024-11-16', 1, '3213123', 'Pagado', 2, 10, NULL, NULL),
+(84, '2024-11-16', 1, '3213123', 'Pagado', 2, 10, NULL, NULL),
+(86, '2024-11-16', 1, '3213123', 'Pagado', 2, 6, NULL, NULL),
+(87, '2024-11-16', 1, '3213123', 'Pagado', 2, 7, NULL, NULL),
+(88, '2024-11-16', 1, '3213123', 'Pagado', 2, 7, NULL, NULL),
+(89, '2024-11-16', 1, '3213123', 'Pagado', 2, 9, NULL, NULL),
+(90, '2024-11-16', 1, '3213123', 'Pagado', 2, 9, NULL, NULL),
+(91, '2024-11-16', 1, '3213123', 'Pagado', 2, 9, NULL, NULL),
+(92, '2024-11-16', 1, '3213123', 'Pagado', 2, 9, NULL, NULL),
+(93, '2024-11-16', 1, '3213123', 'Pagado', 2, 10, NULL, NULL),
+(94, '2024-11-16', 1, '3213123', 'Pagado', 2, 10, NULL, NULL),
+(95, '2024-11-16', 1, '3213123', 'Pagado', 2, 10, NULL, NULL),
+(96, '2024-11-16', 1, '3213123', 'Pagado', 2, 10, NULL, NULL),
+(97, '2024-11-16', 1, '3213123', 'Pagado', 2, 10, NULL, NULL),
+(98, '2024-11-16', 1, '3213123', 'Pagado', 2, 10, NULL, NULL),
+(99, '2024-11-16', 1, '3213123', 'Pagado', 2, 10, NULL, NULL),
+(101, '2024-11-16', 1, '3213123', 'Pagado', 2, 6, NULL, NULL),
+(102, '2024-11-16', 1, '3213123', 'Pagado', 2, 7, NULL, NULL),
+(103, '2024-11-16', 1, '3213123', 'Pagado', 2, 7, NULL, NULL),
+(104, '2024-11-16', 1, '3213123', 'Pagado', 2, 9, NULL, NULL),
+(105, '2024-11-16', 1, '3213123', 'Pagado', 2, 9, NULL, NULL),
+(106, '2024-11-16', 1, '3213123', 'Pagado', 2, 9, NULL, NULL),
+(107, '2024-11-16', 1, '3213123', 'Pagado', 2, 9, NULL, NULL),
+(108, '2024-11-16', 1, '3213123', 'Pagado', 2, 10, NULL, NULL),
+(109, '2024-11-16', 1, '3213123', 'Pagado', 2, 10, NULL, NULL),
+(110, '2024-11-16', 1, '3213123', 'Pagado', 2, 10, NULL, NULL),
+(111, '2024-11-16', 1, '3213123', 'Pagado', 2, 10, NULL, NULL),
+(112, '2024-11-16', 1, '3213123', 'Pagado', 2, 10, NULL, NULL),
+(113, '2024-11-16', 1, '3213123', 'Pagado', 2, 10, NULL, NULL),
+(114, '2024-11-16', 1, '3213123', 'Pagado', 2, 10, NULL, NULL),
+(116, '2024-11-16', 1, '3213123', 'Pagado', 2, 6, NULL, NULL),
+(117, '2024-11-16', 1, '3213123', 'Pagado', 2, 7, NULL, NULL),
+(118, '2024-11-16', 1, '3213123', 'Pagado', 2, 7, NULL, NULL),
+(119, '2024-11-16', 1, '3213123', 'Pagado', 2, 9, NULL, NULL),
+(120, '2024-11-16', 1, '3213123', 'Pagado', 2, 9, NULL, NULL),
+(121, '2024-11-16', 1, '3213123', 'Pagado', 2, 9, NULL, NULL),
+(122, '2024-11-16', 1, '3213123', 'Pagado', 2, 9, NULL, NULL),
+(123, '2024-11-16', 1, '3213123', 'Pagado', 2, 10, NULL, NULL),
+(124, '2024-11-16', 1, '3213123', 'Pagado', 2, 10, NULL, NULL),
+(125, '2024-11-16', 1, '3213123', 'Pagado', 2, 10, NULL, NULL),
+(126, '2024-11-16', 1, '3213123', 'Pagado', 2, 10, NULL, NULL),
+(127, '2024-11-16', 1, '3213123', 'Pagado', 2, 10, NULL, NULL),
+(128, '2024-11-16', 1, '3213123', 'Pagado', 2, 10, NULL, NULL),
+(129, '2024-11-16', 1, '3213123', 'Pagado', 2, 10, NULL, NULL),
+(131, '2024-11-16', 1, '3213123', 'Pagado', 2, 6, NULL, NULL),
+(132, '2024-11-16', 1, '3213123', 'Pagado', 2, 7, NULL, NULL),
+(133, '2024-11-16', 1, '3213123', 'Pagado', 2, 7, NULL, NULL),
+(134, '2024-11-16', 1, '3213123', 'Pagado', 2, 9, NULL, NULL),
+(135, '2024-11-16', 1, '3213123', 'Pagado', 2, 9, NULL, NULL),
+(136, '2024-11-16', 1, '3213123', 'Pagado', 2, 9, NULL, NULL),
+(137, '2024-11-16', 1, '3213123', 'Pagado', 2, 9, NULL, NULL),
+(138, '2024-11-16', 1, '3213123', 'Pagado', 2, 10, NULL, NULL),
+(139, '2024-11-16', 1, '3213123', 'Pagado', 2, 10, NULL, NULL),
+(140, '2024-11-16', 1, '3213123', 'Pagado', 2, 10, NULL, NULL),
+(141, '2024-11-16', 1, '3213123', 'Pagado', 2, 10, NULL, NULL),
+(142, '2024-11-16', 1, '3213123', 'Pagado', 2, 10, NULL, NULL),
+(143, '2024-11-16', 1, '3213123', 'Pagado', 2, 10, NULL, NULL),
+(144, '2024-11-16', 1, '3213123', 'Pagado', 2, 10, NULL, NULL),
+(146, '2024-11-16', 1, '3213123', 'Pagado', 2, 6, NULL, NULL),
+(147, '2024-11-16', 1, '3213123', 'Pagado', 2, 7, NULL, NULL),
+(148, '2024-11-16', 1, '3213123', 'Pagado', 2, 7, NULL, NULL),
+(149, '2024-11-16', 1, '3213123', 'Pagado', 2, 9, NULL, NULL),
+(150, '2024-11-16', 1, '3213123', 'Pagado', 2, 9, NULL, NULL),
+(151, '2024-11-16', 1, '3213123', 'Pagado', 2, 9, NULL, NULL),
+(152, '2024-11-16', 1, '3213123', 'Pagado', 2, 9, NULL, NULL),
+(153, '2024-11-16', 1, '3213123', 'Pagado', 2, 10, NULL, NULL),
+(154, '2024-11-16', 1, '3213123', 'Pagado', 2, 10, NULL, NULL),
+(155, '2024-11-16', 1, '3213123', 'Pagado', 2, 10, NULL, NULL),
+(156, '2024-11-16', 1, '3213123', 'Pagado', 2, 10, NULL, NULL),
+(157, '2024-11-16', 1, '3213123', 'Pagado', 2, 10, NULL, NULL),
+(158, '2024-11-16', 1, '3213123', 'Pagado', 2, 10, NULL, NULL),
+(159, '2024-11-16', 1, '3213123', 'Pagado', 2, 10, NULL, NULL),
+(161, '2024-11-16', 1, '3213123', 'Pagado', 2, 6, NULL, NULL),
+(162, '2024-11-16', 1, '3213123', 'Pagado', 2, 7, NULL, NULL),
+(163, '2024-11-16', 1, '3213123', 'Pagado', 2, 7, NULL, NULL),
+(164, '2024-11-16', 1, '3213123', 'Pagado', 2, 9, NULL, NULL),
+(165, '2024-11-16', 1, '3213123', 'Pagado', 2, 9, NULL, NULL),
+(166, '2024-11-16', 1, '3213123', 'Pagado', 2, 9, NULL, NULL),
+(167, '2024-11-16', 1, '3213123', 'Pagado', 2, 9, NULL, NULL),
+(168, '2024-11-16', 1, '3213123', 'Pagado', 2, 10, NULL, NULL),
+(169, '2024-11-16', 1, '3213123', 'Pagado', 2, 10, NULL, NULL),
+(170, '2024-11-16', 1, '3213123', 'Pagado', 2, 10, NULL, NULL),
+(171, '2024-11-16', 1, '3213123', 'Pagado', 2, 10, NULL, NULL),
+(172, '2024-11-16', 1, '3213123', 'Pagado', 2, 10, NULL, NULL),
+(173, '2024-11-16', 1, '3213123', 'Pagado', 2, 10, NULL, NULL),
+(174, '2024-11-16', 1, '3213123', 'Pagado', 2, 10, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -479,7 +656,7 @@ CREATE TABLE `producto` (
 --
 
 INSERT INTO `producto` (`pro_id`, `pro_nombre`, `pro_descripcion`, `pro_medidas`, `pro_color`, `pro_imagen`, `pro_cantidad`, `pro_precio`, `pro_oferta`, `pro_descuento`, `pro_ven_id`) VALUES
-(1, 'collar', 'dasda', '12', 'rojo', 'collar.jpg', 9, 100, 1, 25, 1),
+(1, 'collar', 'dasda', '12', 'rojo', 'collar.jpg', 8, 100, 1, 25, 1),
 (2, 'blusa', 'dasda', '12', 'blanco', 'blusa.jpg', 8, 100, 0, 25, 1),
 (3, 'botas', 'dasda', '12', 'negro', 'botas.jpg', 0, 100, 1, 25, 1),
 (4, 'camisa', 'dasda', '12', 'azul', 'camisa.jpg', 10, 100, 0, 25, 1),
@@ -605,7 +782,13 @@ INSERT INTO `tipoxproducto` (`txp_id`, `txp_pro_id`, `txp_tpr_id`) VALUES
 (20, 7, 2),
 (21, 11, 3),
 (22, 15, 4),
-(23, 14, 4);
+(23, 14, 4),
+(24, 8, 2),
+(25, 6, 2),
+(26, 12, 3),
+(27, 10, 3),
+(28, 13, 4),
+(29, 14, 4);
 
 -- --------------------------------------------------------
 
@@ -837,13 +1020,13 @@ ALTER TABLE `aviso`
 -- AUTO_INCREMENT de la tabla `calle`
 --
 ALTER TABLE `calle`
-  MODIFY `cal_id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `cal_id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT de la tabla `ciudad`
 --
 ALTER TABLE `ciudad`
-  MODIFY `ciu_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `ciu_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT de la tabla `comentario`
@@ -873,7 +1056,7 @@ ALTER TABLE `distribuidora`
 -- AUTO_INCREMENT de la tabla `domicilio`
 --
 ALTER TABLE `domicilio`
-  MODIFY `dom_id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `dom_id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT de la tabla `incidencia`
@@ -885,7 +1068,7 @@ ALTER TABLE `incidencia`
 -- AUTO_INCREMENT de la tabla `linea`
 --
 ALTER TABLE `linea`
-  MODIFY `lin_id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `lin_id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT de la tabla `pais`
@@ -897,7 +1080,7 @@ ALTER TABLE `pais`
 -- AUTO_INCREMENT de la tabla `pedido`
 --
 ALTER TABLE `pedido`
-  MODIFY `ped_id` int(15) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `ped_id` int(15) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=177;
 
 --
 -- AUTO_INCREMENT de la tabla `producto`
@@ -927,7 +1110,7 @@ ALTER TABLE `tipoproducto`
 -- AUTO_INCREMENT de la tabla `tipoxproducto`
 --
 ALTER TABLE `tipoxproducto`
-  MODIFY `txp_id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `txp_id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT de la tabla `vendedor`

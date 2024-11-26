@@ -119,7 +119,7 @@ $(document).ready(function () {
               height: '100%'
           },
           title: {
-              text: 'Pedidos por continente',
+              text: 'Pedidos por pais',
               align: 'left'
           },
           tooltip: {
