@@ -24,11 +24,7 @@
             <li><a href="https://www.uib.cat/">Universidad</a></li>
         </ul>
         <div class="logins">
-
-
             <a href="#" id="cart-icon"><i class="ri-shopping-cart-line"></i></a>
-
-
             <?php
             if (isset($_COOKIE["usuario"])) {
                 echo '<a href="#" class="user"><i class="ri-user-line"></i>' . $_COOKIE["usuario"] . '</a>';

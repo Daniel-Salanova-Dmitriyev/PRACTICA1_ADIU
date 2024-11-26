@@ -51,6 +51,10 @@ fetch('https://fakestoreapi.com/carts')
             title: {
                 text: 'Productos comprados'
             },
+            subtitle: {
+                text: 'API: <a href="https://fakestoreapi.com/docs" target="_blank">fake store api</a>.',
+                align: 'left'
+            },
             xAxis: {
                 categories: nombresProductos
             },
