@@ -162,7 +162,7 @@ $(document).ready(function () {
           chart: { type: 'pie' },
           title: { text: 'Pedidos por ciudad' },
           series: [{
-            name: 'Ciudades',
+            name: 'Compras',
             colorByPoint: true,
             data: ciudadData
           }]

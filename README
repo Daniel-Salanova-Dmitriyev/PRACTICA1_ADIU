@@ -1,0 +1,57 @@
+# Aplicaciones Distribuidas en Internet y Interfaces de Usuario - Práctica 1
+
+## Autores
+
+- Daniel Salanova Dmitiryev
+- Hugo González Bustos
+
+## Introducción
+
+El objetivo de esta práctica es poner en acción los conocimientos obtenidos a lo largo del curso. Para ello, se ha creado una página web que usará tecnologías como: HTML, PHP, CSS, FETCH API y HIGHCHARTS.
+
+Esta web la podemos dividir en 2 secciones, por una parte la tienda y por otra las estadísticas de esta. La tienda tendrá como objetivo la venta de productos que hay en esta, mientras que la parte de estadísticas mostrará mediante 3 gráficas diferentes diferente información respecto las ventas.
+
+A lo largo de este documento se explicará cada una de las 2 secciones desarrolladas.
+
+## Sección 1: Tienda
+
+Esta parte de la práctica tiene como objetivo nutrir las gráficas de estadísticas, que es una de las partes más importantes de esta primera entrega.
+
+Es así que inicialmente, en el home.php, se mostrarán una barra de navegación con diferentes opciones: Home. Estadísitcas, Universadidad, Iniciar Sesión y Registrarse.
+
+- Home: Nos devuelve a la página principal.
+- Estadísticas: Nos lleva a la página donde se encuentran las 3 gráficas
+- Universidad: Tiene un link que nos redirige a la página oficial de la UIB
+
+- Iniciar Sesión: Mediante un pequeño formulario nos permite iniciar sesión con una cuenta previamente regristada
+-Registrarse: Página con un formulario más extenso que el anterior que nos permite crearnos una cuenta para la web, sino tenemos un usuario creado con el rol de comprador no se nos permitirá comprar productos.
+
+Por otro lado la página 'home' tiene en el centro de esta un buscador que nos permitirá buscar un producto cuyo titulo contenga el texto a buscar. Un selector de categorías, que va en función a las introducidas dentro de la base de datos. Y por otro lado un listado en forma de 'card' de todos los productos contenidos dentro de la base de datos.
+
+Una vez que hayamos iniciado sesión con un usuario con rol de comprador, si añadimos productos al carrito, y posteriormente pulsamos encima del icono de carrito de compra, se nos desplegará una sección donde podremos quitar los productos añadidos o proceder a dirigirnos al 'checkout'.
+
+Dentro de la págian de checkout, que es donde se completará la compra deberemos añadir datos referentes a nuestro método de compra. Adicionalmente, podremos ver todos los productos a comprar y su coste total. Una vez pulsado el botón de confirmar, tendremos un registro de compra adicional en la Base de Datos, dicho registro se verá reflejado dentro de la sección de Estadísticas.
+
+## Sección 2: Estadísticas
+
+Esta parte de la Web contendrá 3 gráficas de diferentes estilos, todas referentes a compras e información adicional de estas. Para crear las gráficas hemos usado la libreria de Highcharts.
+
+Todas las gráficas usarán métodos Fetch para traerse datos ya sea de la base de datos como de la API que se haya usado.
+
+La primera gráfica usa datos de una API gratuita y bastante simple llamada Fake Store API, con esta obtenemos un listado de productos comprados falsos. Después de un procesamiento para contar la cantidad de compras de cada producto se ha creado una gráfica de barras.
+
+Las siguientes dos gráficas ya usan datos de los que contiene la base de datos creada para el proyecto.
+
+La segunda gráfica nos muestra en un gráfico de burbujas las compras que se han hecho en cada país. A medida que se inserten datos de diferentes compras de paises, se añade una nueva burbuja que lo representa. Cada Burbuja tiene el color de su continente, por lo que si se tienen muchos datos se pued ever de un simple vistazo que continente tiene más compras en productos de nuestra web. Cabe aclarar, que si nos posicionamos encima de una de las burbujas nos mostrará el país y sus compras.
+
+La tercera y última gráfica, de manera similar a la anterior, nos presenta en una gráfica de quesos, las proporciones de las compras totales, pero en este caso categorizados por ciudad. Si apuntamos con el ratón sobre una de las secciones nos mostrará la ciudad y el total de compras efectuadas.
+
+## Aviso
+
+Para el correcto funcionamiento de la web se debe exportar la base de datos que se encuentra en el fichero: 'b2oracle.sql'.
+
+Sin este import, la página web no funcionará correctamente.
+
+## Conclusiones
+
+Esta ha sido una práctica bastante entretenida, donde hemos podido poner en práctica todos los conocimientos obtenidos de esta asignatura en cuenta a creación de páginas web y diseño. Por otro lado ver librerias como Highcharts o poner en uso tecnologías como Fetch API nos ha aportado mucho para siguientes proyectos, donde podremos usarlas.
