@@ -24,7 +24,7 @@ Es así que inicialmente, en el home.php, se mostrarán una barra de navegación
 - Universidad: Tiene un link que nos redirige a la página oficial de la UIB
 
 - Iniciar Sesión: Mediante un pequeño formulario nos permite iniciar sesión con una cuenta previamente regristada
--Registrarse: Página con un formulario más extenso que el anterior que nos permite crearnos una cuenta para la web, sino tenemos un usuario creado con el rol de comprador no se nos permitirá comprar productos.
+- Registrarse: Página con un formulario más extenso que el anterior que nos permite crearnos una cuenta para la web, sino tenemos un usuario creado con el rol de comprador no se nos permitirá comprar productos.
 
 Por otro lado la página 'home' tiene en el centro de esta un buscador que nos permitirá buscar un producto cuyo titulo contenga el texto a buscar. Un selector de categorías, que va en función a las introducidas dentro de la base de datos. Y por otro lado un listado en forma de 'card' de todos los productos contenidos dentro de la base de datos.
 
