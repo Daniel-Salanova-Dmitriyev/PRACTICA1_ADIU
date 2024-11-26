@@ -122,10 +122,9 @@
             <div class="row">
 
                 <?php
-                $conexion = mysqli_connect("localhost", "root", "") or die("Error conecting to database server!");
-                $bd = mysqli_select_db($conexion, "bd2oracle") or die("Error selecting database!"); //Elegimos conexión y tabla a la que conectarnos
+                include 'Test/config.php';
                 $instruccion = "SELECT pro_nombre,pro_descripcion,pro_color,pro_medidas, pro_precio, pro_oferta, pro_cantidad, pro_descuento, pro_imagen, ven_usuario FROM producto INNER JOIN vendedor ON pro_ven_id = ven_id WHERE pro_id=" . $_GET["producto"];
-                $res = mysqli_query($conexion, $instruccion);
+                $res = mysqli_query($conn, $instruccion);
 
                 $fila = mysqli_fetch_assoc($res);
                 
@@ -177,14 +176,13 @@
                 <h4>Productos Similares</h4>
                 <div id="similarProductsSlider" class="slick-slider mt-3">
                     <?php
-                        $conexion = mysqli_connect("localhost", "root", "") or die("Error conecting to database server!");
-                        $bd = mysqli_select_db($conexion, "bd2oracle") or die("Error selecting database!"); //Elegimos conexión y tabla a la que conectarnos
+                        include 'Test/config.php';
                         $instruccion = "SELECT pro_nombre FROM producto WHERE pro_id = " . $_GET["producto"];
-                        $res = mysqli_query($conexion, $instruccion);
+                        $res = mysqli_query($conn, $instruccion);
                         $fila = mysqli_fetch_assoc($res);
 
                         $instruccion = "SELECT pro_id, pro_nombre,pro_descripcion, pro_precio, pro_imagen, ven_usuario FROM producto INNER JOIN vendedor ON pro_ven_id = ven_id WHERE pro_id  != ". $_GET["producto"] ." AND pro_nombre LIKE " . "'%" . $fila["pro_nombre"] . "%'" ;
-                        $res = mysqli_query($conexion,$instruccion);
+                        $res = mysqli_query($conn,$instruccion);
                         while ($fila = mysqli_fetch_assoc($res)){
                             echo '<div class="card h-100 mr-4">';
                             echo '<img src="./img/'. $fila["pro_imagen"] . '" class="card-img-top h-50" alt="Producto 1">';
@@ -205,24 +203,23 @@
                 <h4>Comentarios de Clientes</h4>
                 <!-- Formulario para Insertar Comentarios -->
             <?php
-                $conexion = mysqli_connect("localhost", "root", "") or die("Error conecting to database server!");
-                $bd = mysqli_select_db($conexion, "bd2oracle") or die("Error selecting database!"); //Elegimos conexión y tabla a la que conectarnos 
+                include 'Test/config.php';
                 if(isset($_COOKIE["usuario"])){ //Esta logueado
                     if($_COOKIE["tipo"] == "comprador"){
                         $usuarioCookie = $_COOKIE["usuario"];   
     
                         //Recogemos el ID del usuario
                         $instruccion = 'SELECT com_id FROM comprador WHERE com_usuario = "' . $usuarioCookie . '"';
-                        $res = mysqli_query($conexion, $instruccion);
+                        $res = mysqli_query($conn, $instruccion);
                         $id = mysqli_fetch_assoc($res)["com_id"];
         
                         $instruccion = "SELECT COUNT(ped_id) AS contador FROM pedido INNER JOIN linea ON ped_id = lin_ped_id WHERE lin_pro_id =". $_GET["producto"] ." AND ped_com_id =" . $id;
-                        $res = mysqli_query($conexion, $instruccion);
+                        $res = mysqli_query($conn, $instruccion);
                         $contadorCompra = mysqli_fetch_assoc($res)["contador"];
         
         
                         $instruccion = "SELECT COUNT(cmt_com_id) AS contador FROM comentario WHERE cmt_com_id =" . $id . " AND cmt_pro_id =" . $_GET["producto"];
-                        $res = mysqli_query($conexion, $instruccion);
+                        $res = mysqli_query($conn, $instruccion);
                         $contadorComentario = mysqli_fetch_assoc($res)["contador"];
                     
                         if($contadorCompra > 0 && $contadorComentario == 0){
@@ -248,7 +245,7 @@
 
                 //Imprimimos los comentarios
                 $instruccion = "SELECT cmt_descripcion, cmt_fecha, com_usuario FROM comentario INNER JOIN comprador ON cmt_com_id = com_id WHERE cmt_pro_id=" . $_GET["producto"];
-                $res = mysqli_query($conexion, $instruccion);
+                $res = mysqli_query($conn, $instruccion);
                     echo '<div class="comment-list">';
                         echo '<h5>Comentarios Anteriores</h5>';
                         echo '<ul class="list-group">';

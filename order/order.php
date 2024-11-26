@@ -5,8 +5,7 @@
 
 <?php
     //Conexión a la base de datos
-    $conexion = mysqli_connect("localhost", "root", "") or die("Error conecting to database server!");
-    $bd = mysqli_select_db($conexion, "bd2oracle") or die("Error selecting database!"); //Elegimos conexión y tabla a la que conectarnos
+    include '../Test/config.php';
     
     $hoy = getDate();
     $fecha = $hoy["year"] . "-" . $hoy["mon"] . "-" .$hoy["mday"]; 
@@ -14,7 +13,7 @@
     
     //Recogemos el ID del usuario
     $instruccion = 'SELECT com_id FROM comprador WHERE com_usuario = "' . $usuarioCookie . '"';
-    $res = mysqli_query($conexion, $instruccion);
+    $res = mysqli_query($conn, $instruccion);
     $id = mysqli_fetch_assoc($res)["com_id"];
 
 
@@ -23,10 +22,10 @@
 
     //Ejecutamos el insert de pedidos
     $instruccion = 'INSERT INTO pedido (ped_fecha, ped_pagado, ped_estado, ped_com_id, ped_dom_id, ped_tarjeta) VALUES ("'.$fecha.'", TRUE, "Pagado",' . $id . ', ' . $dom .', "'. $_GET["cuentaBancaria"] .'")';  
-    mysqli_query($conexion, $instruccion);
+    mysqli_query($conn, $instruccion);
 
     //Reocgemos el ultimo id del auto_increment
-    $pedido = mysqli_insert_id($conexion);
+    $pedido = mysqli_insert_id($conn);
     
     //Ahora que el pedido esta hecho debemos crear las líneas de productos del propio pedido
     $array = json_decode($_COOKIE["carrito"]);
@@ -38,13 +37,13 @@
     }
     
     $instruccion = substr_replace($instruccion,"",-1);
-    mysqli_query($conexion, $instruccion); //Ejecutamos los inserts de líneas
+    mysqli_query($conn, $instruccion); //Ejecutamos los inserts de líneas
 
     //Actualizamos los productos anteriores descontandoles las cantidades compradas
     for($i=0;$i < count($cantidad) ; $i++){
         $update = "UPDATE producto SET pro_cantidad=pro_cantidad -" .$cantidad[$i] . ' WHERE pro_id = ' . $array[$i]; 
         print($update);
-        mysqli_query($conexion, $update);
+        mysqli_query($conn, $update);
     }
 
     //Eliminamos la cache del carrito ya que esta comprado

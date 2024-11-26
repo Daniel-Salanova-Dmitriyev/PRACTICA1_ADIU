@@ -145,15 +145,14 @@
                 <tbody>
                     <?php
                     if (isset($_COOKIE["carrito"])) {
-                        $conexion = mysqli_connect("localhost", "root", "") or die("Error conecting to database server!");
-                        $bd = mysqli_select_db($conexion, "bd2oracle") or die("Error selecting database!"); //Elegimos conexión y tabla a la que conectarnos
+                        include 'Test/config.php';
 
                         $array = json_decode($_COOKIE["carrito"]);
                         $cantidad = json_decode($_COOKIE["cantidadCarrito"]);
                         $precioTotal = 0;
                         for ($i = 0; $i < count($array); $i++) {
                             $instruccion = "SELECT pro_nombre, pro_precio, pro_descuento, pro_oferta FROM producto WHERE pro_id = " . $array[$i];
-                            $res = mysqli_query($conexion, $instruccion);
+                            $res = mysqli_query($conn, $instruccion);
                             $fila = mysqli_fetch_assoc($res);
 
                             $precio = 0;
@@ -201,17 +200,16 @@
                     //o manualmente en la base de datos ya que no se gestiona para un grupo de 1 persona
 
 
-                    $conexion = mysqli_connect("localhost", "root", "") or die("Error conecting to database server!");
-                    $bd = mysqli_select_db($conexion, "bd2oracle") or die("Error selecting database!"); //Elegimos conexión y tabla a la que conectarnos
+                    include 'Test/config.php';
 
                     $usuarioCookie = $_COOKIE["usuario"];
                     //Recogemos el ID del usuario
                     $instruccion = 'SELECT com_id FROM comprador WHERE com_usuario = "' . $usuarioCookie . '"';
-                    $res = mysqli_query($conexion, $instruccion);
+                    $res = mysqli_query($conn, $instruccion);
                     $id = mysqli_fetch_assoc($res)["com_id"];
 
                     $instruccion = "SELECT dom_id, dom_letra, dom_numero, dom_bloque, ciu_nombre, cal_nombre FROM domicilio INNER JOIN calle ON dom_cal_id = cal_id INNER JOIN ciudad ON ciu_id = cal_ciu_id WHERE dom_com_id = " . $id;
-                    $res = mysqli_query($conexion, $instruccion);
+                    $res = mysqli_query($conn, $instruccion);
 
                     echo '<select class="form-control mb-3" name="dom_id" id="dom_id" required>';
                     while ($fila = mysqli_fetch_assoc($res)) {
@@ -244,8 +242,7 @@
                         <?php
                         //Contenido de la tabla de resumen de pedido
 
-                        $conexion = mysqli_connect("localhost", "root", "") or die("Error conecting to database server!");
-                        $bd = mysqli_select_db($conexion, "bd2oracle") or die("Error selecting database!"); //Elegimos conexión y tabla a la que conectarnos
+                        include 'Test/config.php';
 
                         $precioTotal = 0;
                         $array = json_decode($_COOKIE["carrito"]);
@@ -253,7 +250,7 @@
                         echo '<tbody>';
                         for ($i = 0; $i < count($array); $i++) {
                             $instruccion = "SELECT pro_nombre, pro_precio, pro_descuento, pro_oferta FROM producto WHERE pro_id = " . $array[$i];
-                            $res = mysqli_query($conexion, $instruccion);
+                            $res = mysqli_query($conn, $instruccion);
                             $fila = mysqli_fetch_assoc($res);
                             $precio = 0;
                             if ($fila["pro_oferta"]) {

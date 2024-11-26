@@ -124,15 +124,14 @@
                 <tbody>
                     <?php
                     if (isset($_COOKIE["carrito"])) {
-                        $conexion = mysqli_connect("localhost", "root", "") or die("Error conecting to database server!");
-                        $bd = mysqli_select_db($conexion, "bd2oracle") or die("Error selecting database!"); //Elegimos conexión y tabla a la que conectarnos
+                        include 'Test/config.php';
 
                         $array = json_decode($_COOKIE["carrito"]);
                         $cantidad = json_decode($_COOKIE["cantidadCarrito"]);
                         $precioTotal = 0;
                         for ($i = 0; $i < count($array); $i++) {
                             $instruccion = "SELECT pro_nombre, pro_precio, pro_descuento, pro_oferta FROM producto WHERE pro_id = " . $array[$i];
-                            $res = mysqli_query($conexion, $instruccion);
+                            $res = mysqli_query($conn, $instruccion);
                             $fila = mysqli_fetch_assoc($res);
 
                             $precio = 0;
@@ -204,10 +203,10 @@
                         <!--- Listado de categorias --->
                         <a class="list-group-item list-group-item-actio" href="home.php?categoria=0">Todo</a>
                         <?php
-                        $conexion = mysqli_connect("localhost", "root", "") or die("Error conecting to database server!");
-                        $bd = mysqli_select_db($conexion, "bd2oracle") or die("Error selecting database!"); //Elegimos conexión y tabla a la que conectarnos
+                        include 'Test/config.php';
+
                         $instruccion = "SELECT * FROM tipoproducto";
-                        $res = mysqli_query($conexion, $instruccion);
+                        $res = mysqli_query($conn, $instruccion);
 
                         while ($fila = mysqli_fetch_assoc($res)) {
                             echo "<a class='list-group-item list-group-item-actio' href='home.php?categoria=" . $fila["tpr_id"] . "'>" . $fila["tpr_nombre"] . "</a>";
@@ -220,8 +219,8 @@
                 <div class="col-md-9">
                     <div class="row row-cols-1 row-cols-md-3 g-4" style="margin-bottom:200px">
                         <?php
-                            $conexion = mysqli_connect("localhost", "root", "") or die("Error conecting to database server!");
-                            $bd = mysqli_select_db($conexion, "bd2oracle") or die("Error selecting database!"); //Elegimos conexión y tabla a la que conectarnos
+                            include 'Test/config.php';
+
                             $instruccion = "";
                             if (!isset($_GET["categoria"]) || $_GET["categoria"] == 0) {
                                 $instruccion = "SELECT pro_id, pro_nombre,pro_descripcion, pro_precio, pro_oferta, pro_descuento, pro_cantidad, pro_imagen FROM producto";
@@ -233,7 +232,7 @@
                                 $instruccion = "SELECT pro_id, pro_nombre, pro_precio,pro_descripcion, pro_oferta, pro_descuento, pro_cantidad, pro_imagen FROM producto WHERE pro_nombre LIKE" .  "'%" . $_GET["buscar"] . "%'";
                             }
 
-                            $res = mysqli_query($conexion, $instruccion);
+                            $res = mysqli_query($conn, $instruccion);
                             
                             while ($fila = mysqli_fetch_assoc($res)) {
 

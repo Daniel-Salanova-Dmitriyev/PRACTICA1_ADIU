@@ -137,15 +137,14 @@
                 <tbody>
                     <?php
                     if (isset($_COOKIE["carrito"])) {
-                        $conexion = mysqli_connect("localhost", "root", "") or die("Error conecting to database server!");
-                        $bd = mysqli_select_db($conexion, "bd2oracle") or die("Error selecting database!"); //Elegimos conexión y tabla a la que conectarnos
+                        include 'Test/config.php';
 
                         $array = json_decode($_COOKIE["carrito"]);
                         $cantidad = json_decode($_COOKIE["cantidadCarrito"]);
                         $precioTotal = 0;
                         for ($i = 0; $i < count($array); $i++) {
                             $instruccion = "SELECT pro_nombre, pro_precio, pro_descuento, pro_oferta FROM producto WHERE pro_id = " . $array[$i];
-                            $res = mysqli_query($conexion, $instruccion);
+                            $res = mysqli_query($conn, $instruccion);
                             $fila = mysqli_fetch_assoc($res);
 
                             $precio = 0;

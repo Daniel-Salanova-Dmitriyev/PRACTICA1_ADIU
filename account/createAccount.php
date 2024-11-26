@@ -5,9 +5,7 @@
 
 <?php
     //Conexión a la base de datos
-    $conexion = mysqli_connect("localhost", "root", "") or die("Error conecting to database server!");
-    $bd = mysqli_select_db($conexion, "bd2oracle") or die("Error selecting database!"); //Elegimos conexión y tabla a la que conectarnos
-    
+    include '../Test/config.php';
     //Elementos recogidos del formulario
     $tipo = $_GET["tipo"];
     $nombre = $_GET["nombre"];
@@ -27,7 +25,7 @@
     if ($tipo == "comprador"){
         //Comprobamos que el correo no este ya dentro de la base de datos
         $comprobacion = 'SELECT com_usuario FROM comprador WHERE com_usuario="' .$usuario . '"';
-        $res_comprobacion = mysqli_query($conexion, $comprobacion);
+        $res_comprobacion = mysqli_query($conn, $comprobacion);
         $contador = mysqli_num_rows($res_comprobacion);
 
         if($contador != 0){
@@ -38,11 +36,11 @@
             if($apellido2 == ""){
                 $instruccion = 'INSERT INTO comprador (com_dni, com_nombre, com_apellido1, com_apellido2, com_usuario, com_contraseña, com_telefono) VALUES("'. $dni .'","' . $nombre . '","' . $apellido1 . '", NULL,"' . $usuario . '","' . $contraseña . '","' . $telefono .'")';            
             }
-            $conexion->query($instruccion);
+            $conn->query($instruccion);
 
             //Recogemos el ID del comprador añadido
             $instruccion = 'SELECT com_id FROM comprador WHERE com_usuario = "' . $usuario . '"';
-            $res = mysqli_query($conexion, $instruccion);
+            $res = mysqli_query($conn, $instruccion);
             $id = mysqli_fetch_assoc($res)["com_id"];
 
 
@@ -50,14 +48,14 @@
             //Insertamos el domicilio al que pertenece
             $instruccion = 'INSERT INTO domicilio (dom_numero, dom_letra, dom_bloque, dom_cal_id, dom_com_id) VALUES ('. $numero . ', "' . $puerta .'", "' .$bloque. '", ' . $calle .  ', ' . $id . ')';
             print($instruccion);
-            $conexion->query($instruccion);
+            $conn->query($instruccion);
 
             header("Location: ../register.php?estado=1");
         }   
     }elseif($tipo == "vendedor"){
         //Comprobamos que el usuario no exista
         $comprobacion = 'SELECT  ven_usuario FROM vendedor WHERE ven_usuario ="' .$usuario . '"';
-        $res_comprobacion = mysqli_query($conexion, $comprobacion);
+        $res_comprobacion = mysqli_query($conn, $comprobacion);
         $contador = mysqli_num_rows($res_comprobacion);
 
         if($contador != 0){
@@ -69,14 +67,14 @@
                 $instruccion = 'INSERT INTO vendedor (ven_dni, ven_nombre, ven_apellido1, ven_apellido2, ven_usuario, ven_contraseña, ven_telefono) VALUES("'. $dni .'","' . $nombre . '","' . $apellido1 . '", NULL,"' . $usuario . '","' . $contraseña . '","' . $telefono . '")';
             }
             print($instruccion);
-            $conexion->query($instruccion);
+            $conn->query($instruccion);
             header("Location: ../register.php?estado=1");
         }
 
     }elseif($tipo == "controlador"){
         //Comprobamos que el usuario no exista
         $comprobacion = 'SELECT con_usuario FROM controlador WHERE con_usuario ="' .$usuario . '"';
-        $res_comprobacion = mysqli_query($conexion, $comprobacion);
+        $res_comprobacion = mysqli_query($conn, $comprobacion);
         $contador = mysqli_num_rows($res_comprobacion);
 
         if($contador != 0){
@@ -89,7 +87,7 @@
             
             }
             print($instruccion);
-            $conexion->query($instruccion);
+            $conn->query($instruccion);
             header("Location: ../register.php?estado=1");
             exit();
         }
@@ -98,7 +96,7 @@
     }else { //Repartidor
         //Comprobamos que el usuario no exista
         $comprobacion = 'SELECT rep_usuario FROM repartidor WHERE rep_usuario ="' .$usuario . '"';
-        $res_comprobacion = mysqli_query($conexion, $comprobacion);
+        $res_comprobacion = mysqli_query($conn, $comprobacion);
         $contador = mysqli_num_rows($res_comprobacion);
 
         if($contador != 0){
@@ -111,7 +109,7 @@
             
             }
             print($instruccion);
-            $conexion->query($instruccion);
+            $conn->query($instruccion);
             header("Location: ../register.php?estado=1");
         }
 

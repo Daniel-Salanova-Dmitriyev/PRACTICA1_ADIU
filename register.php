@@ -141,15 +141,14 @@
         <tbody>
             <?php
             if (isset($_COOKIE["carrito"])) {
-                $conexion = mysqli_connect("localhost", "root", "") or die("Error conecting to database server!");
-                $bd = mysqli_select_db($conexion, "bd2oracle") or die("Error selecting database!"); //Elegimos conexión y tabla a la que conectarnos
+                include 'Test/config.php';
 
                 $array = json_decode($_COOKIE["carrito"]);
                 $cantidad = json_decode($_COOKIE["cantidadCarrito"]);
                 $precioTotal = 0;
                 for ($i = 0; $i < count($array); $i++) {
                     $instruccion = "SELECT pro_nombre, pro_precio, pro_descuento, pro_oferta FROM producto WHERE pro_id = " . $array[$i];
-                    $res = mysqli_query($conexion, $instruccion);
+                    $res = mysqli_query($conn, $instruccion);
                     $fila = mysqli_fetch_assoc($res);
 
                     $precio = 0;
@@ -233,10 +232,9 @@
                             <option disabled selected value> -- selecciona un país -- </option>
                             <?php
                             //Recogemos todos los paises disponibles dentro de la pagina web
-                            $conexion = mysqli_connect("localhost", "root", "") or die("Error conecting to database server!");
-                            $bd = mysqli_select_db($conexion, "bd2oracle") or die("Error selecting database!"); //Elegimos conexión y tabla a la que conectarnos
+                            include 'Test/config.php';
                             $instruccion = "SELECT pai_id, pai_nombre FROM pais";
-                            $res = mysqli_query($conexion, $instruccion);
+                            $res = mysqli_query($conn, $instruccion);
 
                             while ($fila = mysqli_fetch_assoc($res)) {
                                 echo '<option value="' . $fila["pai_id"] . '">' . $fila["pai_nombre"] . '</option>';
@@ -248,10 +246,9 @@
                             <option disabled selected value> -- selecciona una ciudad -- </option>
                             <?php
                             //Recogemos todas las ciudades dentro de la base de datos
-                            $conexion = mysqli_connect("localhost", "root", "") or die("Error conecting to database server!");
-                            $bd = mysqli_select_db($conexion, "bd2oracle") or die("Error selecting database!"); //Elegimos conexión y tabla a la que conectarnos
+                            include 'Test/config.php';
                             $instruccion = "SELECT ciu_id, ciu_nombre, ciu_pai_id, pai_nombre FROM ciudad INNER JOIN pais ON ciu_pai_id = pai_id";
-                            $res = mysqli_query($conexion, $instruccion);
+                            $res = mysqli_query($conn, $instruccion);
 
                             while ($fila = mysqli_fetch_assoc($res)) {
                                 echo '<option value="' . $fila["ciu_id"] . '-' . $fila["ciu_pai_id"] . '">' . $fila["ciu_nombre"] . ' - ' . $fila["pai_nombre"] . '</option>';
@@ -263,10 +260,9 @@
                             <option disabled selected value> -- selecciona una calle -- </option>
                             <?php
                             //Recogemos todas las calles
-                            $conexion = mysqli_connect("localhost", "root", "") or die("Error conecting to database server!");
-                            $bd = mysqli_select_db($conexion, "bd2oracle") or die("Error selecting database!"); //Elegimos conexión y tabla a la que conectarnos
+                            include 'Test/config.php';
                             $instruccion = "SELECT cal_id, cal_nombre, cal_ciu_id, ciu_nombre FROM calle INNER JOIN ciudad ON cal_ciu_id = ciu_id";
-                            $res = mysqli_query($conexion, $instruccion);
+                            $res = mysqli_query($conn, $instruccion);
 
                             while ($fila = mysqli_fetch_assoc($res)) {
                                 echo '<option value="' . $fila["cal_id"] . '-' . $fila["cal_ciu_id"] . '">' . $fila["cal_nombre"] . ' - ' . $fila["ciu_nombre"]. '</option>';

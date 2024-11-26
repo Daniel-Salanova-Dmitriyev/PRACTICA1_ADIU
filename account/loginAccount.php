@@ -4,8 +4,7 @@
 -->
 <?php
     //Conexión a la base de datos
-    $conexion = mysqli_connect("localhost", "root", "") or die("Error conecting to database server!");
-    $bd = mysqli_select_db($conexion, "bd2oracle") or die("Error selecting database!"); //Elegimos conexión y tabla a la que conectarnos
+    include '../Test/config.php';
     
     //Elementos recogidos del formulario
     $tipo = $_GET["tipo"];
@@ -26,7 +25,7 @@
 
     $instruccion = "SELECT " . $prefijo . "_id FROM " . $tipo . " WHERE " . $prefijo . '_usuario="' . $usuario . '" AND ' . $prefijo . '_contraseña="' . $contraseña . '";';
     print($instruccion);
-    $res_comprobacion = mysqli_query($conexion, $instruccion);
+    $res_comprobacion = mysqli_query($conn, $instruccion);
     $contador = mysqli_num_rows($res_comprobacion);
     
     //Si contador == 1 es que usuario y contraseña coinciden con algun registro de la tabla 
