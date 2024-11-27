@@ -175,7 +175,7 @@
                                 echo '<div class="col">';
                                     echo '<div class="card">';
                                         echo '<div class="container-img">';
-                                            echo '<img src="img/' . $fila["pro_imagen"] . '" class="card-img-top" alt="...">';
+                                            echo '<img src="img/' . $fila["pro_imagen"] . '" class="card-img-top" alt=" ' . $fila["pro_imagen"] .'">';
                                         echo '</div>';
                                         echo '<div class="card-body">';
                                             echo '<h5 class="card-title">' . $fila["pro_nombre"]. '</h5>';

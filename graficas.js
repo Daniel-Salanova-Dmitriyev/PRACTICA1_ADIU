@@ -2,19 +2,19 @@
 let productos = new Map();
 
 fetch('https://fakestoreapi.com/carts')
-    .then(res=>res.json())
-    .then(json=> {
+    .then(res => res.json())
+    .then(json => {
         json.forEach(carrito => {
             let arrayProductos = carrito.products;
             arrayProductos.forEach(element => {
-                if(!productos.get(element.productId)){ //No existe el elemento en el mapa
+                if (!productos.get(element.productId)) { //No existe el elemento en el mapa
                     productos.set(element.productId, element.quantity);
-                }else{
+                } else {
                     let cantidad = productos.get(element.productId);
-                    productos.set(element.productId, cantidad+element.quantity);
+                    productos.set(element.productId, cantidad + element.quantity);
                 }
             });
-        });   
+        });
         //Obtenemos 2 mapIterators de claves y valores
         let nombresProductos = productos.keys();
         let valoresProductos = productos.values();
@@ -24,25 +24,25 @@ fetch('https://fakestoreapi.com/carts')
         //Colocamos los valores
         let valoresSeries = []; //Será un array con objetos {nombre, densidad}
         let i = 0;
-        for(const e of valoresProductos){
-            let serie = {name:"", data:[].fill(0,0,length)};
-            for(j = 0; j<length; j++){
-                if(i==j){
+        for (const e of valoresProductos) {
+            let serie = { name: "", data: [].fill(0, 0, length) };
+            for (j = 0; j < length; j++) {
+                if (i == j) {
                     serie.data.push(e);
-                }else{
+                } else {
                     serie.data.push(0);
                 }
             }
-            
+
             i++;
             valoresSeries.push(serie);
         }
         //Colocamos los nombres
-        i=0;
-        for(const nombre of nombresProductos){
+        i = 0;
+        for (const nombre of nombresProductos) {
             valoresSeries[i++].name = "Producto " + nombre;
         }
-        
+
         //Una vez que hemos filtrado los datos en un Mapa con las densidades de cada productId
         const chart = Highcharts.chart('container', {
             chart: {
@@ -55,6 +55,9 @@ fetch('https://fakestoreapi.com/carts')
                 text: 'API: <a href="https://fakestoreapi.com/docs" target="_blank">fake store api</a>.',
                 align: 'left'
             },
+            caption: {
+                text: '<b>Esta gráfica enseñará la cantidad de productos comprados. Usa los datos de la API Fake Store.</b>'
+            },
             xAxis: {
                 categories: nombresProductos
             },
@@ -65,9 +68,9 @@ fetch('https://fakestoreapi.com/carts')
             },
             series: valoresSeries
         });
-    
-        }
-    
+
+    }
+
     )
 
 $(document).ready(function () {
@@ -76,98 +79,102 @@ $(document).ready(function () {
         let mapa = [];
 
         const nacionalidadData = data.nacionalidad.map(item => ({
-          continente: item.Continente,
-          name: item.Nacionalidad,
-          y: parseInt(item.TotalPedidos)
+            continente: item.Continente,
+            name: item.Nacionalidad,
+            y: parseInt(item.TotalPedidos)
         }));
 
         console.log(nacionalidadData);
-  
+
         const ciudadData = data.ciudad.map(item => ({
-          name: item.Ciudad,
-          y: parseInt(item.TotalPedidos)
+            name: item.Ciudad,
+            y: parseInt(item.TotalPedidos)
         }));
-  
+
         // {name: CONTINENTE, data: {{name: PAIS, value: VALOR}}}
         const continentMap = new Map();
 
         // Agrupamos los datos por continente usando un Map
         nacionalidadData.forEach(item => {
-          console.log(item);
-          if (!continentMap.has(item.continente)) {
-            // Si el continente no existe en el mapa, lo añadimos con un array vacío
-            continentMap.set(item.continente, []);
-          }
-          
-          // Agregamos el país al continente correspondiente
-          continentMap.get(item.continente).push({
-            name: item.name,
-            value: parseInt(item.y, 10) // Convertimos TotalPedidos a número
-          });
+            console.log(item);
+            if (!continentMap.has(item.continente)) {
+                // Si el continente no existe en el mapa, lo añadimos con un array vacío
+                continentMap.set(item.continente, []);
+            }
+
+            // Agregamos el país al continente correspondiente
+            continentMap.get(item.continente).push({
+                name: item.name,
+                value: parseInt(item.y, 10) // Convertimos TotalPedidos a número
+            });
         });
-        
+
         // Convertimos el Map al formato requerido
         const mapaContinentesPedidos = Array.from(continentMap, ([continent, countries]) => ({
-          name: continent,
-          data: countries
+            name: continent,
+            data: countries
         }));
-        
+
         // Generar gráfico para nacionalidad
         Highcharts.chart('grafico1', {
-          chart: {
-              type: 'packedbubble',
-              height: '100%'
-          },
-          title: {
-              text: 'Pedidos por pais',
-              align: 'left'
-          },
-          tooltip: {
-              useHTML: true,
-              pointFormat: '<b>{point.name}:</b> {point.value} pedidos'
-          },
-          plotOptions: {
-              packedbubble: {
-                  minSize: '30%',
-                  maxSize: '120%',
-                  zMin: 0,
-                  zMax: 1000,
-                  layoutAlgorithm: {
-                      splitSeries: false,
-                      gravitationalConstant: 0.02
-                  },
-                  dataLabels: {
-                      enabled: true,
-                      format: '{point.name}',
-                      filter: {
-                          property: 'y',
-                          operator: '>',
-                          value: 250
-                      },
-                      style: {
-                          color: 'black',
-                          textOutline: 'none',
-                          fontWeight: 'normal'
-                      }
-                  }
-              }
-          },
-          series: mapaContinentesPedidos
-      });
+            chart: {
+                type: 'packedbubble',
+                height: '100%'
+            },
+            title: {
+                text: 'Pedidos por pais',
+                align: 'left'
+            },
+            tooltip: {
+                useHTML: true,
+                pointFormat: '<b>{point.name}:</b> {point.value} pedidos'
+            },
+            caption: {
+                text: '<b>Gráfica que muestra la cantidad de compras efectuadas en cada país.</b>'
+            },
+            plotOptions: {
+                packedbubble: {
+                    minSize: '30%',
+                    maxSize: '120%',
+                    zMin: 0,
+                    zMax: 1000,
+                    layoutAlgorithm: {
+                        splitSeries: false,
+                        gravitationalConstant: 0.02
+                    },
+                    dataLabels: {
+                        enabled: true,
+                        format: '{point.name}',
+                        filter: {
+                            property: 'y',
+                            operator: '>',
+                            value: 250
+                        },
+                        style: {
+                            color: 'black',
+                            textOutline: 'none',
+                            fontWeight: 'normal'
+                        }
+                    }
+                }
+            },
+            series: mapaContinentesPedidos
+        });
 
-        
-  
         // Generar gráfico para ciudad
         Highcharts.chart('grafico2', {
-          chart: { type: 'pie' },
-          title: { text: 'Pedidos por ciudad' },
-          series: [{
-            name: 'Compras',
-            colorByPoint: true,
-            data: ciudadData
-          }]
+            chart: { type: 'pie' },
+            title: { text: 'Pedidos por ciudad' },
+            caption: {
+                text: '<b>Número de productos comprados en nuestra tienda según la ciudad.</b>'
+            },
+            series: [{
+                name: 'Compras',
+                colorByPoint: true,
+                data: ciudadData
+            }]
         });
-      }).fail(function (xhr, status, error) {
+    }).fail(function (xhr, status, error) {
         console.error("Error al obtener los datos: " + error);
-      });
+    });
 });

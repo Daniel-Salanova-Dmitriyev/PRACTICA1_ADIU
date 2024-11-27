@@ -17,7 +17,7 @@ A lo largo de este documento se explicará cada una de las 2 secciones desarroll
 
 Esta parte de la práctica tiene como objetivo nutrir las gráficas de estadísticas, que es una de las partes más importantes de esta primera entrega.
 
-Es así que inicialmente, en el home.php, se mostrarán una barra de navegación con diferentes opciones: Home. Estadísitcas, Universadidad, Iniciar Sesión y Registrarse.
+Es así que inicialmente, en el home.php, se mostrarán una barra de navegación con diferentes opciones: Home, Estadísitcas, Universadidad, Iniciar Sesión y Registrarse.
 
 - Home: Nos devuelve a la página principal.
 - Estadísticas: Nos lleva a la página donde se encuentran las 3 gráficas
@@ -30,19 +30,27 @@ Por otro lado la página 'home' tiene en el centro de esta un buscador que nos p
 
 Una vez que hayamos iniciado sesión con un usuario con rol de comprador, si añadimos productos al carrito, y posteriormente pulsamos encima del icono de carrito de compra, se nos desplegará una sección donde podremos quitar los productos añadidos o proceder a dirigirnos al 'checkout'.
 
-Dentro de la págian de checkout, que es donde se completará la compra deberemos añadir datos referentes a nuestro método de compra. Adicionalmente, podremos ver todos los productos a comprar y su coste total. Una vez pulsado el botón de confirmar, tendremos un registro de compra adicional en la Base de Datos, dicho registro se verá reflejado dentro de la sección de Estadísticas.
+Dentro de la página de checkout, que es donde se completará la compra deberemos añadir datos referentes a nuestro método de compra. Adicionalmente, podremos ver todos los productos a comprar y su coste total. Una vez pulsado el botón de confirmar, tendremos un registro de compra adicional en la base de datos, dicho registro se verá reflejado dentro de la sección de Estadísticas.
 
 ## Sección 2: Estadísticas
 
 Esta parte de la Web contendrá 3 gráficas de diferentes estilos, todas referentes a compras e información adicional de estas. Para crear las gráficas hemos usado la libreria de Highcharts.
 
-Todas las gráficas usarán métodos Fetch para traerse datos ya sea de la base de datos como de la API que se haya usado.
+Todas las gráficas usarán métodos **fetch** para traerse datos ya sea de la base de datos como de la API que se haya usado.
 
 La primera gráfica usa datos de una API gratuita y bastante simple llamada Fake Store API, con esta obtenemos un listado de productos comprados falsos. Después de un procesamiento para contar la cantidad de compras de cada producto se ha creado una gráfica de barras.
 
+Cuando llamamos la contenido de la siguiente dirección "https://fakestoreapi.com/carts", nos devuelve un JSON con 20 elementos, dichos datos se tendrán que procesar dentro del método FETCH para que cumplan con el formato de la gráfica.
+
+Entre otras cosas que nos permite hacer la API encontramos: listar todos los productos, crear nuevos productos o eliminarlos, limitar resultados, recoger categorias, ordenarlos...
+
+Es una API muy sencilla pero que cumple con el objetivo principal de la práctica.
+
 Las siguientes dos gráficas ya usan datos de los que contiene la base de datos creada para el proyecto.
 
-La segunda gráfica nos muestra en un gráfico de burbujas las compras que se han hecho en cada país. A medida que se inserten datos de diferentes compras de paises, se añade una nueva burbuja que lo representa. Cada Burbuja tiene el color de su continente, por lo que si se tienen muchos datos se pued ever de un simple vistazo que continente tiene más compras en productos de nuestra web. Cabe aclarar, que si nos posicionamos encima de una de las burbujas nos mostrará el país y sus compras.
+La segunda gráfica nos muestra en un gráfico de burbujas las compras que se han hecho en cada país. A medida que se inserten datos de diferentes compras de paises, se añade una nueva burbuja que lo representa. Cada Burbuja tiene el color de su continente, por lo que si se tienen muchos datos se puede ver de un simple vistazo que continente tiene más compras en productos de nuestra web. Cabe aclarar, que si nos posicionamos encima de una de las burbujas nos mostrará el país y sus compras.
+
+Además de eso, las burbujas son más grandes a medida que dichos paises hayan hecho compras, de esta manera no solo veremos que continente hace más compras, sino que tambien podremos visualizar el país.
 
 La tercera y última gráfica, de manera similar a la anterior, nos presenta en una gráfica de quesos, las proporciones de las compras totales, pero en este caso categorizados por ciudad. Si apuntamos con el ratón sobre una de las secciones nos mostrará la ciudad y el total de compras efectuadas.
 
@@ -50,7 +58,17 @@ La tercera y última gráfica, de manera similar a la anterior, nos presenta en 
 
 Para el correcto funcionamiento de la web se debe exportar la base de datos que se encuentra en el fichero: 'b2oracle.sql'.
 
-Sin este import, la página web no funcionará correctamente.
+Sin este import, la página web no funcionará correctamente, ya que no podrá mostrar los datos de los articulos de la tienda ni las gráficas que usen dichos datos.
+
+## Tecnologías usadas para la práctica
+
+- HTML
+- CSS y Bootstrap 5
+- JavaScript
+- PHP
+- Highcharts
+- RemixIcons y BoxIcons para los iconos de la barra de navegación
+- SQL para la base de datos
 
 ## Conclusiones
 
